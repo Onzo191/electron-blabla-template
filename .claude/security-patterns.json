@@ -1,0 +1,57 @@
+{
+  "patterns": [
+    {
+      "rule_name": "electron_node_integration_enabled",
+      "regex": "nodeIntegration\\s*:\\s*true",
+      "reminder": "nodeIntegration must stay false. Renderer code must never get Node access; use the typed IPC contract instead."
+    },
+    {
+      "rule_name": "electron_context_isolation_disabled",
+      "regex": "contextIsolation\\s*:\\s*false",
+      "reminder": "contextIsolation must stay true. Disabling it exposes the preload/main privilege boundary to the renderer."
+    },
+    {
+      "rule_name": "electron_sandbox_disabled",
+      "regex": "sandbox\\s*:\\s*false",
+      "reminder": "sandbox must stay true for all BrowserWindows. If a capability is missing, add a typed IPC channel instead."
+    },
+    {
+      "rule_name": "electron_web_security_disabled",
+      "regex": "(webSecurity\\s*:\\s*false|allowRunningInsecureContent\\s*:\\s*true)",
+      "reminder": "Never disable webSecurity or allow insecure content, including in dev builds."
+    },
+    {
+      "rule_name": "raw_ipc_channel_in_renderer",
+      "substrings": ["ipcRenderer.invoke(\"", "ipcRenderer.invoke('", "ipcRenderer.send(\"", "ipcRenderer.send('"],
+      "paths": ["**/apps/desktop/src/renderer/**"],
+      "reminder": "Renderer must not call ipcRenderer directly. Use window.api.* backed by the Zod contract in packages/shared/src/ipc-contract.ts."
+    },
+    {
+      "rule_name": "token_in_web_storage",
+      "regex": "(localStorage|sessionStorage)\\.setItem\\([^)]*(token|secret|apiKey|api_key|auth)",
+      "paths": ["**/apps/desktop/src/renderer/**"],
+      "reminder": "Tokens/secrets never go to web storage. Store via safeStorage through the auth IPC channel; keep only in renderer memory."
+    },
+    {
+      "rule_name": "open_external_unvalidated",
+      "substrings": ["shell.openExternal("],
+      "reminder": "shell.openExternal must only receive URLs validated against the https allowlist helper — never backend/model-derived values directly."
+    },
+    {
+      "rule_name": "execute_javascript",
+      "substrings": ["executeJavaScript("],
+      "reminder": "webContents.executeJavaScript is code injection into the renderer. Prefer a typed IPC channel; if unavoidable, only static strings."
+    },
+    {
+      "rule_name": "webview_tag",
+      "substrings": ["<webview", "webviewTag: true"],
+      "reminder": "The <webview> tag is deprecated and unsafe. Use BrowserView/WebContentsView with strict options, or reconsider the design."
+    },
+    {
+      "rule_name": "csp_weakened",
+      "substrings": ["unsafe-inline", "unsafe-eval"],
+      "paths": ["**/apps/desktop/src/renderer/**"],
+      "reminder": "Do not weaken the CSP with unsafe-inline/unsafe-eval. Fix the underlying need (e.g. move inline scripts into modules)."
+    }
+  ]
+}
