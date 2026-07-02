@@ -2,7 +2,7 @@
   "name": "myvng-agent-desktop",
   "version": "0.0.0",
   "private": true,
-  "packageManager": "pnpm@10.12.1",
+  "packageManager": "pnpm@10.34.4",
   "engines": {
     "node": ">=24"
   },
