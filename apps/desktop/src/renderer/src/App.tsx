@@ -1,8 +1,18 @@
+import { useState } from "react";
 import electronLogo from "./assets/electron.svg";
 import Versions from "./components/Versions";
 
 function App(): React.JSX.Element {
-  const ipcHandle = (): void => window.electron.ipcRenderer.send("ping");
+  const [appVersion, setAppVersion] = useState<string | null>(null);
+
+  const ipcHandle = async (): Promise<void> => {
+    const result = await window.api.invoke("app:getVersion", undefined);
+    if (result.ok) {
+      setAppVersion(`${result.data.version} (${result.data.platform})`);
+    } else {
+      setAppVersion(`error ${result.error.code}: ${result.error.message}`);
+    }
+  };
 
   return (
     <>
@@ -22,11 +32,14 @@ function App(): React.JSX.Element {
           </a>
         </div>
         <div className="action">
-          <button type="button" onClick={ipcHandle}>
-            Send IPC
+          <button type="button" onClick={() => void ipcHandle()}>
+            Get app version via IPC
           </button>
         </div>
       </div>
+      {appVersion !== null && (
+        <p className="tip">app:getVersion → {appVersion}</p>
+      )}
       <Versions></Versions>
     </>
   );

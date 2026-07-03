@@ -1,7 +1,8 @@
 import { join } from "node:path";
 import { electronApp, is, optimizer } from "@electron-toolkit/utils";
-import { app, BrowserWindow, ipcMain, shell } from "electron";
+import { app, BrowserWindow, shell } from "electron";
 import icon from "../../resources/icon.png?asset";
+import { registerIpcHandlers } from "./ipc";
 
 function createWindow(): void {
   // Create the browser window.
@@ -13,7 +14,9 @@ function createWindow(): void {
     ...(process.platform === "linux" ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, "../preload/index.js"),
-      sandbox: false,
+      sandbox: true,
+      contextIsolation: true,
+      nodeIntegration: false,
     },
   });
 
@@ -22,7 +25,9 @@ function createWindow(): void {
   });
 
   mainWindow.webContents.setWindowOpenHandler((details) => {
-    shell.openExternal(details.url);
+    if (details.url.startsWith("https://")) {
+      void shell.openExternal(details.url);
+    }
     return { action: "deny" };
   });
 
@@ -49,8 +54,7 @@ app.whenReady().then(() => {
     optimizer.watchWindowShortcuts(window);
   });
 
-  // IPC test
-  ipcMain.on("ping", () => console.log("pong"));
+  registerIpcHandlers();
 
   createWindow();
 

@@ -22,7 +22,12 @@
     },
     {
       "rule_name": "raw_ipc_channel_in_renderer",
-      "substrings": ["ipcRenderer.invoke(\"", "ipcRenderer.invoke('", "ipcRenderer.send(\"", "ipcRenderer.send('"],
+      "substrings": [
+        "ipcRenderer.invoke(\"",
+        "ipcRenderer.invoke('",
+        "ipcRenderer.send(\"",
+        "ipcRenderer.send('"
+      ],
       "paths": ["**/apps/desktop/src/renderer/**"],
       "reminder": "Renderer must not call ipcRenderer directly. Use window.api.* backed by the Zod contract in packages/shared/src/ipc-contract.ts."
     },
