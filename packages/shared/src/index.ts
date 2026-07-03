@@ -1,6 +1,11 @@
 // Barrel for shared types, Zod schemas, and pure utilities.
 
 export {
+  type Conversation,
+  conversationSchema,
+  conversationsResponseSchema,
+} from "./domain/conversation";
+export {
   type AppError,
   appErrorSchema,
   CodedError,

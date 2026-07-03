@@ -13,12 +13,18 @@
       "!**/coverage",
       "!**/test-results",
       "!**/playwright-report",
-      "!**/*.svg"
+      "!**/*.svg",
+      "!**/routeTree.gen.ts"
     ]
   },
   "formatter": {
     "enabled": true,
     "indentStyle": "space"
+  },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    }
   },
   "linter": {
     "enabled": true

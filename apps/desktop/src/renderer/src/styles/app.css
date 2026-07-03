@@ -1,0 +1,21 @@
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+@import "./tokens.css";
+
+@theme {
+  --color-brand-500: var(--brand-500);
+  --color-brand-600: var(--brand-600);
+  --color-surface: var(--surface);
+  --color-surface-100: var(--surface-100);
+  --color-surface-200: var(--surface-200);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --radius-md: var(--radius-md);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
