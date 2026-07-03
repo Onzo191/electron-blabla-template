@@ -1,15 +1,15 @@
-import { type AppError, toAppError } from "@myvng/shared";
+import { toAppError } from "@myvng/shared";
 import type { z } from "zod";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "http://localhost:4000";
 
 export class ApiError extends Error {
-  readonly appError: AppError;
+  readonly code: string;
 
-  constructor(appError: AppError) {
-    super(appError.message);
+  constructor(message: string, code: string, options?: { cause?: unknown }) {
+    super(message, options);
     this.name = "ApiError";
-    this.appError = appError;
+    this.code = code;
   }
 }
 
@@ -25,6 +25,7 @@ export async function apiGet<T>(
     const json: unknown = await response.json();
     return schema.parse(json);
   } catch (error) {
-    throw new ApiError(toAppError(error));
+    const appError = toAppError(error);
+    throw new ApiError(appError.message, appError.code, { cause: error });
   }
 }

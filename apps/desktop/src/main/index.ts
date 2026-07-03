@@ -3,6 +3,7 @@ import { electronApp, is, optimizer } from "@electron-toolkit/utils";
 import { app, BrowserWindow, shell } from "electron";
 import icon from "../../resources/icon.png?asset";
 import { registerIpcHandlers } from "./ipc";
+import { initLogger, logger } from "./services/logger";
 
 function createWindow(): void {
   // Create the browser window.
@@ -44,6 +45,9 @@ function createWindow(): void {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
+  initLogger();
+  logger.info("app ready");
+
   // Set app user model id for windows
   electronApp.setAppUserModelId("com.electron");
 

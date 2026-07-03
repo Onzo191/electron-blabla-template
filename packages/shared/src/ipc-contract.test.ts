@@ -82,3 +82,35 @@ describe("auth:getToken", () => {
     expect(() => response.parse({})).toThrow();
   });
 });
+
+describe("log:write", () => {
+  const { request, response } = ipcContract["log:write"];
+
+  it("accepts a valid log entry without meta", () => {
+    expect(request.parse({ level: "info", message: "hello" })).toEqual({
+      level: "info",
+      message: "hello",
+    });
+  });
+
+  it("accepts a valid log entry with meta", () => {
+    expect(
+      request.parse({ level: "error", message: "boom", meta: "{}" }),
+    ).toEqual({ level: "error", message: "boom", meta: "{}" });
+  });
+
+  it("rejects an invalid level", () => {
+    expect(() =>
+      request.parse({ level: "verbose", message: "hello" }),
+    ).toThrow();
+  });
+
+  it("rejects an empty message", () => {
+    expect(() => request.parse({ level: "info", message: "" })).toThrow();
+  });
+
+  it("only accepts ok: true as response", () => {
+    expect(response.parse({ ok: true })).toEqual({ ok: true });
+    expect(() => response.parse({ ok: false })).toThrow();
+  });
+});

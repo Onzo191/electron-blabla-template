@@ -22,6 +22,14 @@ export const ipcContract = {
     request: z.void(),
     response: z.object({ token: z.string().nullable() }),
   },
+  "log:write": {
+    request: z.object({
+      level: z.enum(["error", "warn", "info", "debug"]),
+      message: z.string().min(1),
+      meta: z.string().optional(),
+    }),
+    response: z.object({ ok: z.literal(true) }),
+  },
 } as const;
 
 export type IpcContract = typeof ipcContract;

@@ -1,4 +1,5 @@
 import { QueryCache, QueryClient } from "@tanstack/react-query";
+import { logger } from "../shared/lib/logger";
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -10,7 +11,7 @@ export const queryClient = new QueryClient({
   },
   queryCache: new QueryCache({
     onError: (error, query) => {
-      console.error(`[query:${query.queryHash}]`, error);
+      logger.error(`query failed: ${query.queryHash}`, error);
     },
   }),
 });
