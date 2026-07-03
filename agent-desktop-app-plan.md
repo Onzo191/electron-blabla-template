@@ -39,7 +39,7 @@ plugin system.
 | Router          | TanStack Router                       | Type-safe routing                                              |
 | Server state    | TanStack Query v5                     | Caching/retry/invalidation for all BE calls                    |
 | Client state    | Zustand (slice pattern + devtools)    | UI state, transient streaming state                            |
-| Styling         | Tailwind CSS v4 + shadcn/ui           | You own 100% of component code; Claude generates it well       |
+| Styling         | Tailwind CSS v4 + Chakra UI v3        | Chakra provides accessible interactive components; Tailwind owns layout/utility styling |
 | Package manager | pnpm 10 + workspaces                  | Monorepo, fast, workspace protocol                             |
 | Runtime         | Node 24 (pinned via .nvmrc + engines) |                                                                |
 | Packaging       | electron-builder + electron-updater   | Auto-update, signing, notarization                             |
@@ -231,8 +231,9 @@ my-agent-app/
 - [ ] QueryClient: default staleTime, retry policy, global error handler
 - [ ] Root Zustand store + slice pattern; first slice is `uiSlice`
       (sidebar, theme)
-- [ ] Tailwind v4 + shadcn/ui base components (Button, Input, Dialog,
-      ScrollArea, Tooltip, DropdownMenu)
+- [ ] Tailwind v4 + Chakra UI provider/theme + base components (Button,
+      Input, Dialog, Menu, Tooltip), shared design tokens wired into both
+      (see `docs/ui-guidelines.md`)
 - [ ] `shared/lib/api-client.ts`: fetch wrapper + Zod parsing + error
       normalization (`AppError { code, message, cause }`)
 - [ ] MSW setup for dev + test
@@ -366,6 +367,7 @@ trim rules it never violates.
 | `renderer.md`       | `apps/desktop/src/renderer/**` | function declarations for components; hooks named `use*`; query keys come from a factory in `features/*/api/keys.ts`     |
 | `tests.md`          | `**/*.test.ts(x)`              | Vitest + RTL; mock the BE with MSW; test stores as vanilla stores                                                        |
 | `shared-package.md` | `packages/shared/**`           | types + Zod schemas + pure functions only; never import electron/react                                                   |
+| `ui.md`             | renderer components/styles     | Chakra for interactive components, Tailwind for layout/spacing; one styling system per element; tokens defined once     |
 
 ### 5.3 Skills to Write — `.claude/skills/<name>/SKILL.md`
 
@@ -383,13 +385,15 @@ file/path/context to auto-invoke at the right time).
 3. `review-electron-security` — checklist: contextIsolation, CSP,
    openExternal validation, no tokens in renderer storage, IPC input
    validation.
+4. `build-ui` — the Tailwind + Chakra split: which library owns what,
+   theme/token setup, dark mode, and a sample component.
 
-**Nice to have (Phase 2–4):** 4. `add-query` — the standard pattern for a new query/mutation: key
-factory, Zod parsing, error handling, invalidation. 5. `streaming-patterns` — your BE's SSE event spec, the Zustand-vs-Query
-split during streaming, how to test streams with MSW. 6. `write-tests` — conventions per test type (store/hook/component/E2E) +
+**Nice to have (Phase 2–4):** 5. `add-query` — the standard pattern for a new query/mutation: key
+factory, Zod parsing, error handling, invalidation. 6. `streaming-patterns` — your BE's SSE event spec, the Zustand-vs-Query
+split during streaming, how to test streams with MSW. 7. `write-tests` — conventions per test type (store/hook/component/E2E) +
 templates.
 
-**Release (Phase 6):** 7. `release` — bump version → changelog → tag → CI build → verify
+**Release (Phase 6):** 8. `release` — bump version → changelog → tag → CI build → verify
 notarization → publish.
 
 **Community add-ons:** open-source skill/hook bundles (e.g. Dave's Claude
@@ -489,7 +493,7 @@ cheaper model for repetitive work.** Switch mid-session with `/model`.
 | Type of work                                                                                        | Model                                                      | Examples in this project                                         |
 | --------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------------- |
 | Architecture, boilerplate scaffolding, IPC contract design, security review, hard debugging         | **Your strongest available model**                         | All of Phase 0–1, designing the SSE layer, ADR decisions         |
-| Implementing features against an established pattern, writing tests, small refactors, UI components | **Sonnet** (daily default)                                 | Phase 2–5: adding features, writing queries/mutations, shadcn UI |
+| Implementing features against an established pattern, writing tests, small refactors, UI components | **Sonnet** (daily default)                                 | Phase 2–5: adding features, writing queries/mutations, Chakra UI |
 | Mechanical work: renames, formatting, doc updates, repetitive boilerplate generation                | **Haiku** (or just stay on Sonnet if cost isn't a concern) | Changelog updates, bulk typo fixes                               |
 
 Practical rules of thumb:
@@ -535,7 +539,7 @@ just copies the pattern.
 - [ ] CLAUDE.md following the template in 5.1
 - [ ] `.claude/settings.json` + 3 hook scripts (check-file, guard-bash,
       final-check)
-- [ ] `.claude/rules/` — 4 files (Section 5.2)
+- [ ] `.claude/rules/` — 5 files (Section 5.2)
 - [ ] Skill `add-ipc-channel` (write this first — you can use Claude
       Code's built-in skill-creator skill)
 - [ ] `docs/architecture.md` + `docs/adr/001`, `002` (transcribe the
@@ -558,7 +562,7 @@ just copies the pattern.
 - [ ] QueryClient + one complete sample query (key factory → fetch → Zod
       parse → component consuming it) running against MSW
 - [ ] Zustand store + a sample `uiSlice` + one slice test
-- [ ] Tailwind + shadcn/ui base components + dark mode
+- [ ] Tailwind + Chakra UI provider, base components + dark mode
 - [ ] One sample RTL component test
 - [ ] This is **sample pattern #2, #3, #4** (query, slice, component test)
 

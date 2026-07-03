@@ -59,6 +59,8 @@ tokens, agent status, panel open/closed. Rules:
 ## Done checklist
 
 - [ ] Folder matches the layout; public surface only through `index.ts`
+- [ ] Components follow the Chakra + Tailwind split (see `/build-ui` and
+      `.claude/rules/ui.md`)
 - [ ] Keys from the factory; responses Zod-parsed; no `any`
 - [ ] No Query data copied into Zustand
 - [ ] Route added (TanStack Router) if the feature has a page

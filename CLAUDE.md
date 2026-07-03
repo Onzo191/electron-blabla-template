@@ -2,7 +2,7 @@
 
 Electron desktop client (Mac + Windows) for the existing agentic backend.
 pnpm monorepo. Stack: Electron + electron-vite, React 19, TypeScript strict,
-TanStack Router/Query, Zustand, Tailwind v4 + shadcn/ui, Biome, Vitest,
+TanStack Router/Query, Zustand, Tailwind v4 + Chakra UI v3, Biome, Vitest,
 Playwright. Node 24, pnpm 10 only (npm/yarn are blocked by hooks).
 
 ## Commands
@@ -51,11 +51,15 @@ Playwright. Node 24, pnpm 10 only (npm/yarn are blocked by hooks).
 ## Docs & skills (read on demand — don't preload)
 
 - Architecture, data flow, ADRs: `docs/architecture.md`
+- UI stack (Chakra-vs-Tailwind split, tokens, dark mode):
+  `docs/ui-guidelines.md`
 - Third-party skill policy & compression rules: `docs/claude-code-skills.md`
 - Project skills:
   - `/add-ipc-channel` — schema in contract → handler in main → call via
     `window.api` → test
   - `/add-feature` — scaffold a standard feature folder + checklist
+  - `/build-ui` — build renderer UI with Chakra UI + Tailwind: ownership
+    split, theme tokens, dark mode
   - `/write-tests` — per-layer test conventions incl. MSW v2 SSE mocking
     and Playwright `_electron` fixtures
   - `/review-electron-security` — deep Electron security audit
