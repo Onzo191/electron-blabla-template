@@ -55,7 +55,7 @@ plugin system.
 | Logging          | electron-log (main) + renderer log bridge via IPC                      |
 | Error tracking   | Sentry `@sentry/electron` (main + renderer)                            |
 | Validation       | Zod — every IPC payload and BE response                                |
-| CI               | GitHub Actions: check (lint + typecheck + test) + build matrix mac/win |
+| CI               | Self-hosted GitLab CI: check (lint + typecheck + test) + build matrix mac/win + tag-gated release stage — see `docs/release-cicd.md` |
 
 ### 2.3 Node 24 + pnpm 10 — Required Configuration
 
@@ -286,18 +286,36 @@ my-agent-app/
 - **DoD:** `pnpm check` is a trustworthy gate; any crash shows up in
   Sentry + the log file.
 
-### Phase 6 — Packaging & Release (3–4 days)
+### Phase 6 — Packaging & Release (3–4 days, +1–2 weeks for store submissions)
+
+Full architecture, rationale, and open decisions: `docs/release-cicd.md`.
 
 - [ ] electron-builder: mac (dmg + zip, notarized) + win (nsis), asar
-      enabled
-- [ ] Code signing: Apple Developer ID + notarization; Windows cert (or
-      Azure Trusted Signing)
-- [ ] electron-updater: latest/beta channels + update notification UI
-- [ ] GitHub Actions release workflow: tag → build matrix mac/win → sign →
-      publish draft release
-- [ ] Smoke-test the real build on both OSes
+      enabled — direct-download channel
+- [ ] electron-builder overlay configs: `mas` (Mac App Store) + `appx`
+      (Microsoft Store) — sandboxed entitlements, no `publish` block
+- [ ] Code signing: Apple Developer ID + notarization (direct) + Apple
+      Distribution cert (MAS); Windows EV/OV cert via a cloud HSM signer
+      that supports non-US orgs (SSL.com eSigner or DigiCert KeyLocker —
+      Azure Trusted Signing is US/Canada-only, not usable here)
+- [ ] electron-updater: latest/beta channels + our own `update-policy.json`
+      manifest (minSupportedVersion / forceUpdate) for mandatory updates
+- [ ] Update notification UI: dismissable banner (soft) + non-dismissable
+      forced-update dialog when running version < minSupportedVersion
+- [ ] Store builds (`process.mas` / `process.windowsStore`) skip
+      `electron-updater` entirely — Store owns updates there
+- [ ] GitLab CI: `check` + `build` (smoke, unsigned, every push) already
+      drafted (`.gitlab-ci.yml`); `release` stage (tag-gated, real signing
+      + notarization + update-feed publish) needs runners + certs
+      provisioned first — see open items in `docs/release-cicd.md`
+- [ ] Provision: self-hosted macOS + Windows GitLab runners, Apple
+      Developer org account, Microsoft Partner Center account, internal
+      update-feed host
+- [ ] Smoke-test the real build on both OSes (direct channel first; store
+      submissions are a separate, human-gated step)
 - **DoD:** installs cleanly from the installer on a clean machine on both
-  OSes; auto-update works.
+  OSes; direct-channel auto-update works end-to-end including the forced-
+  update path; store builds install and update via their respective store.
 
 ---
 
@@ -594,6 +612,8 @@ just copies the pattern.
 | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | pnpm's symlinks break electron-builder    | Hoisted `.npmrc` from day one (Section 2.3); test a real build as early as Phase 1                                  |
 | macOS notarization issues                 | Set up an Apple Developer ID early; test notarization by mid-Phase 5                                                |
+| App/Store review delays block a release   | Direct-download channel ships independently of store review; store builds are a secondary, human-gated path (`docs/release-cicd.md`) |
+| No macOS/Windows GitLab runner yet        | Provision self-hosted runners before Phase 6 starts; `check`/`build` stages already run on the shared Linux runner |
 | BE's SSE spec changes                     | All event types live in the shared Zod schema — one edit surfaces every affected call site as a compile error       |
 | Long conversations causing lag            | Virtualization + memoized markdown blocks are mandatory from the start of Phase 4, not deferred as "optimize later" |
 | CLAUDE.md bloating, Claude ignoring rules | Review every two weeks, keep it under 150 lines, move detail into skills/docs                                       |

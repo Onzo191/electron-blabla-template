@@ -58,7 +58,8 @@ app.whenReady().then(() => {
     optimizer.watchWindowShortcuts(window);
   });
 
-  registerIpcHandlers();
+  const stopUpdateChecks = registerIpcHandlers();
+  app.on("before-quit", stopUpdateChecks);
 
   createWindow();
 

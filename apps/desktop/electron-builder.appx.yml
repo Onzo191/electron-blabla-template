@@ -1,0 +1,16 @@
+# Microsoft Store overlay. Run with:
+#   electron-builder --win appx --config electron-builder.appx.yml
+# Extends the direct-channel config (electron-builder.yml) and overrides
+# only what differs for a Store build. See docs/release-cicd.md.
+extends: electron-builder.yml
+win:
+  target: appx
+appx:
+  applicationId: MyVngAgentDesktop
+  publisherDisplayName: VNG
+  displayName: myVNG Agent Desktop
+  # TODO: fill in from the Microsoft Partner Center app identity reservation.
+  identityName: TODO-partner-center-identity-name
+  publisher: TODO-partner-center-publisher-id
+# No update feed for a Store build — the Microsoft Store owns updates.
+publish: null

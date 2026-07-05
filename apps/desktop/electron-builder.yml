@@ -38,6 +38,10 @@ linux:
 appImage:
   artifactName: ${name}-${version}.${ext}
 npmRebuild: false
+# Direct-download channel only — mas/appx builds use the *.mas.yml/*.appx.yml
+# overlays, which set publish: null. TODO: point this at the real internal
+# distribution host once it's provisioned (docs/release-cicd.md Section 5).
 publish:
   provider: generic
-  url: https://example.com/auto-updates
+  url: https://updates.internal.vng.com.vn/agent-desktop/latest
+

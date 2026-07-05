@@ -1,4 +1,5 @@
 import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
+import { UpdateNotifications } from "../features/updates";
 
 export const Route = createRootRoute({
   component: RootLayout,
@@ -7,6 +8,7 @@ export const Route = createRootRoute({
 function RootLayout(): React.JSX.Element {
   return (
     <div className="flex h-full w-full overflow-hidden bg-surface text-text">
+      <UpdateNotifications />
       <nav
         aria-label="Primary"
         className="flex w-56 shrink-0 flex-col gap-1 border-r border-surface-200 bg-surface-100 p-3"

@@ -114,3 +114,49 @@ describe("log:write", () => {
     expect(() => response.parse({ ok: false })).toThrow();
   });
 });
+
+describe("app:getUpdateStatus", () => {
+  const { request, response } = ipcContract["app:getUpdateStatus"];
+
+  const validStatus = {
+    state: "available",
+    currentVersion: "1.0.0",
+    latestVersion: "1.1.0",
+    releaseNotesUrl: null,
+    downloadProgress: null,
+    isForced: false,
+    errorMessage: null,
+  };
+
+  it("accepts a void request", () => {
+    expect(() => request.parse(undefined)).not.toThrow();
+  });
+
+  it("accepts a valid update status", () => {
+    expect(response.parse(validStatus)).toEqual(validStatus);
+  });
+
+  it("rejects an unknown state", () => {
+    expect(() =>
+      response.parse({ ...validStatus, state: "installing" }),
+    ).toThrow();
+  });
+
+  it("rejects a missing field", () => {
+    const { isForced: _isForced, ...incomplete } = validStatus;
+    expect(() => response.parse(incomplete)).toThrow();
+  });
+});
+
+describe("app:quitAndInstall", () => {
+  const { request, response } = ipcContract["app:quitAndInstall"];
+
+  it("accepts a void request", () => {
+    expect(() => request.parse(undefined)).not.toThrow();
+  });
+
+  it("only accepts started: true as response", () => {
+    expect(response.parse({ started: true })).toEqual({ started: true });
+    expect(() => response.parse({ started: false })).toThrow();
+  });
+});

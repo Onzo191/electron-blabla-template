@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { updateStatusSchema } from "./domain/update";
 import type { IpcResult } from "./errors";
 
 /**
@@ -29,6 +30,24 @@ export const ipcContract = {
       meta: z.string().optional(),
     }),
     response: z.object({ ok: z.literal(true) }),
+  },
+  // Direct-channel updater only (packaged mas/appx builds never register
+  // these handlers — see apps/desktop/src/main/services/updater.ts).
+  "app:checkForUpdates": {
+    request: z.void(),
+    response: updateStatusSchema,
+  },
+  "app:getUpdateStatus": {
+    request: z.void(),
+    response: updateStatusSchema,
+  },
+  "app:downloadUpdate": {
+    request: z.void(),
+    response: updateStatusSchema,
+  },
+  "app:quitAndInstall": {
+    request: z.void(),
+    response: z.object({ started: z.literal(true) }),
   },
 } as const;
 

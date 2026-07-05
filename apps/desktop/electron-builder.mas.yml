@@ -1,0 +1,17 @@
+# Mac App Store overlay. Run with:
+#   electron-builder --mac mas --config electron-builder.mas.yml
+# Extends the direct-channel config (electron-builder.yml) and overrides
+# only what differs for a sandboxed Store build. See docs/release-cicd.md.
+extends: electron-builder.yml
+mac:
+  target: mas
+  type: distribution
+  # MAS uses app sandbox instead of Developer ID + notarization.
+  hardenedRuntime: false
+  entitlements: build/entitlements.mas.plist
+  entitlementsInherit: build/entitlements.mas.inherit.plist
+  # TODO: set once the Apple Developer org account + provisioning profile exist.
+  provisioningProfile: build/embedded.provisionprofile
+  notarize: false
+# No update feed for a Store build — Apple hosts and updates the binary.
+publish: null

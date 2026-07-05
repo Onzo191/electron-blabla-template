@@ -6,6 +6,16 @@ export {
   conversationsResponseSchema,
 } from "./domain/conversation";
 export {
+  compareVersions,
+  isVersionBelow,
+  type UpdatePolicy,
+  type UpdateState,
+  type UpdateStatus,
+  updatePolicySchema,
+  updateStateSchema,
+  updateStatusSchema,
+} from "./domain/update";
+export {
   type AppError,
   appErrorSchema,
   CodedError,
