@@ -5,11 +5,27 @@
   --surface: oklch(0.99 0 0);
   --surface-100: oklch(0.96 0 0);
   --surface-200: oklch(0.9 0 0);
+  --surface-raised: oklch(1 0 0);
 
   --text: oklch(0.2 0 0);
   --text-muted: oklch(0.45 0 0);
+  --text-faint: oklch(0.6 0 0);
+
+  --bubble-user: oklch(0.94 0.025 255);
+  --bubble-user-text: var(--text);
+
+  --border-subtle: oklch(0.93 0 0);
+  --accent: var(--brand-500);
+
+  --success: oklch(0.65 0.15 150);
+  --danger: oklch(0.6 0.2 25);
 
   --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1.125rem;
+  --radius-full: 9999px;
+
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Fira Code", monospace;
 }
 
 .dark {
@@ -19,7 +35,17 @@
   --surface: oklch(0.2 0.01 255);
   --surface-100: oklch(0.25 0.01 255);
   --surface-200: oklch(0.32 0.01 255);
+  --surface-raised: oklch(0.24 0.01 255);
 
   --text: oklch(0.95 0 0);
   --text-muted: oklch(0.72 0 0);
+  --text-faint: oklch(0.6 0.01 255);
+
+  --bubble-user: oklch(0.3 0.035 255);
+  --bubble-user-text: var(--text);
+
+  --border-subtle: oklch(0.3 0.01 255);
+
+  --success: oklch(0.7 0.15 150);
+  --danger: oklch(0.68 0.19 25);
 }

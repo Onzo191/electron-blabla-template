@@ -1,4 +1,5 @@
 import type { StateCreator } from "zustand";
+import { DEFAULT_LANGUAGE, i18next, type Language } from "../../i18n";
 
 export type Theme = "light" | "dark" | "system";
 export type ResolvedTheme = "light" | "dark";
@@ -25,8 +26,10 @@ export type UiSlice = {
   sidebarOpen: boolean;
   theme: Theme;
   resolvedTheme: ResolvedTheme;
+  language: Language;
   toggleSidebar: () => void;
   setTheme: (theme: Theme) => void;
+  setLanguage: (language: Language) => void;
   /** Re-resolves against the current OS preference; no-op unless theme is "system". */
   syncSystemTheme: () => void;
 };
@@ -38,7 +41,12 @@ export const createUiSlice: StateCreator<UiSlice, [], [], UiSlice> = (
   sidebarOpen: true,
   theme: "system",
   resolvedTheme: resolveTheme("system"),
+  language: DEFAULT_LANGUAGE,
   toggleSidebar: () => set((state) => ({ sidebarOpen: !state.sidebarOpen })),
+  setLanguage: (language) => {
+    void i18next.changeLanguage(language);
+    set({ language });
+  },
   setTheme: (theme) => {
     const resolvedTheme = resolveTheme(theme);
     applyResolvedTheme(resolvedTheme);

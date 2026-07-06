@@ -44,19 +44,32 @@ false`, strict CSP in index.html.
    is never copied into Zustand.
 4. **Streaming lives outside Query.** SSE tokens flow into a Zustand
    selector so only the actively-typing bubble re-renders; the completed
-   message is written back into the Query cache once done. Long lists are
-   virtualized (`@tanstack/react-virtual`), markdown blocks memoized.
+   message is written back into the Query cache once done. Markdown blocks
+   are memoized per paragraph. (Virtualization via
+   `@tanstack/react-virtual` is deferred — streaming dynamic heights and
+   scroll-height-delta pagination fight virtualizers; see
+   `docs/chat-feature.md`.)
 5. **Feature-based renderer.** Each feature under
    `renderer/src/features/<name>/` owns its components/hooks/api/store and
    exports through a single `index.ts`; no cross-feature internal imports.
    Workflow: `/add-feature`.
 
-## Data flow: sending a message
+## Data flow: sending a message (implemented — see docs/chat-feature.md)
 
-optimistic user message into Query cache → POST /chat/stream (SSE) →
-`token` events append to `chatSlice.streamingMessage` → `tool_call` /
-`tool_result` render as collapsible cards → `done` writes the final message
-into the Query cache and resets the slice → `error`/drop shows retry UX.
+optimistic user bubble from `chatSlice` → POST `/v2/api/messages/ask`
+(SSE over fetch + ReadableStream, slice-owned AbortController) →
+`{response}` fragments drain through a rAF token queue into
+`chatSlice.streamedText` → `{reasoning}` fills the reasoning accordion,
+`{type:"tool_status"}` shows a live indicator → `data: [DONE]` writes the
+completed exchange into the Query cache (`["messages", conversationId]`)
+and resets the slice → `{error}`/drop shows an inline retry block. A new
+conversation's `{type:"conversation"}` event seeds the messages cache and
+redirects to `/chat/$conversationId` without interrupting the stream.
+
+The renderer chat UI is feature-split: `features/agents` (picker,
+greeting, prompt topics), `features/conversations` (sidebar lists + CRUD),
+`features/chat` (messages, streaming, widget pipeline). i18n:
+react-i18next, `vi` + `en`, strings generated from the product spec.
 
 ## Monorepo
 

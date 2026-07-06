@@ -1,10 +1,87 @@
 // Barrel for shared types, Zod schemas, and pure utilities.
 
 export {
+  dataEnvelopeSchema,
+  type Paginated,
+  type Pagination,
+  paginatedSchema,
+  paginationSchema,
+} from "./api/envelope";
+export {
+  type AgentBasicInfo,
+  type AgentDetail,
+  type AgentSummary,
+  agentBasicInfoResponseSchema,
+  agentBasicInfoSchema,
+  agentDetailSchema,
+  agentListResponseSchema,
+  agentSummarySchema,
+  defaultAgentResponseSchema,
+  greetingMessageSchema,
+  greetingTranslationSchema,
+  type PromptTopic,
+  promptTopicSchema,
+} from "./domain/agent";
+export {
+  type Attachment,
+  type AttachmentStatus,
+  attachmentListResponseSchema,
+  attachmentSchema,
+  attachmentStatusSchema,
+  attachmentUploadResponseSchema,
+} from "./domain/attachment";
+export {
+  type AskColleaguesPayload,
+  type AttachmentItem,
+  type AttachmentsPayload,
+  askColleaguesPayloadSchema,
+  attachmentItemSchema,
+  attachmentsPayloadSchema,
+  type ClosingPayload,
+  type Colleague,
+  closingPayloadSchema,
+  colleagueSchema,
+  type ExportArtifactPayload,
+  type ExportFormatPickerPayload,
+  exportArtifactPayloadSchema,
+  exportFormatPickerPayloadSchema,
+  type MediaItem,
+  type MediaPayload,
+  mediaItemSchema,
+  mediaPayloadSchema,
+  type ReferenceItem,
+  type ReferencesPayload,
+  referenceItemSchema,
+  referencesPayloadSchema,
+  type SuggestionsPayload,
+  type SupportContact,
+  type SupportContactPayload,
+  suggestionsPayloadSchema,
+  supportContactPayloadSchema,
+  supportContactSchema,
+  WIDGET_MARKERS,
+  type WidgetBlock,
+  type WidgetMarker,
+  type WidgetType,
+  widgetBlockSchema,
+} from "./domain/chat-widgets";
+export {
   type Conversation,
+  conversationInitResponseSchema,
+  conversationListResponseSchema,
   conversationSchema,
-  conversationsResponseSchema,
 } from "./domain/conversation";
+export {
+  type ChatMessage,
+  chatMessageSchema,
+  type MessageFeedback,
+  type MessageRole,
+  messageFeedbackSchema,
+  messageHistoryResponseSchema,
+  messageRoleSchema,
+  type Reference,
+  referenceSchema,
+} from "./domain/message";
 export {
   compareVersions,
   isVersionBelow,
@@ -32,3 +109,4 @@ export {
   type IpcResponse,
   ipcContract,
 } from "./ipc-contract";
+export { type AskSseEvent, parseAskSseLine } from "./sse/ask-events";

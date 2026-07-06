@@ -58,6 +58,12 @@ Both systems consume them, neither redefines them:
 Adding a color/spacing/radius = add the variable, wire it into both maps.
 Never hardcode hex/px values in components.
 
+Chat-era tokens (all in `tokens.css`, light + `.dark`): `--bubble-user`,
+`--surface-raised`, `--border-subtle`, `--accent`, `--text-faint`,
+`--success`, `--danger`, `--radius-lg/-xl/-full`, `--font-mono`. Assistant
+markdown typography and highlight.js token colors live in `app.css` under
+`.chat-prose`, driven by the same variables.
+
 ## Global reset & layers
 
 Chakra's provider ships the global reset, so Tailwind preflight stays
@@ -91,8 +97,28 @@ Never read or write color mode through a second mechanism.
   in the feature folder.
 - Wrappers re-export a constrained surface, they don't re-style Chakra
   from scratch. Variants belong in the Chakra recipe/theme config, not in
-  per-call-site prop soup.
+  per-call-site prop soup. Exception (documented): custom recipe variants
+  require Chakra's typegen step, which this repo doesn't run — reusable
+  looks are shared wrapper components instead (`ChipButton`,
+  `GhostIconButton` in `shared/components/`).
 - Function declarations, named exports (repo-wide rule).
+
+## Motion & animation
+
+Library: `motion` v12, loaded via `LazyMotion features={domAnimation}` +
+`m.*` components, with `<MotionConfig reducedMotion="user">` app-wide.
+Strict split — never double-animate:
+
+- **motion**: things CSS can't do — list reorder (`<m.li layout>` on
+  sidebar pin/unpin), enter/exit (`AnimatePresence` for the
+  scroll-to-bottom button, lightbox crossfade), new-message entrance.
+- **CSS keyframes** (`app.css`): loops — typing dots (`chat-bounce`),
+  streaming cursor blink, shimmer. All guarded by
+  `prefers-reduced-motion`.
+- **Chakra built-ins**: Dialog/Menu/Tooltip/Collapsible transitions stay
+  Chakra's — don't wrap them in motion.
+
+Keep it minimalist: tweens of 120–200ms, standard easing, no springs.
 
 ## Testing
 

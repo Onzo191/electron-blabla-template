@@ -10,4 +10,9 @@ export function registerAuthHandlers(store: SecureTokenStore): void {
   registerHandler("auth:getToken", () => ({
     token: store.getToken(),
   }));
+
+  registerHandler("auth:clearToken", () => {
+    store.clearToken();
+    return { cleared: true as const };
+  });
 }

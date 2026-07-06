@@ -160,3 +160,16 @@ describe("app:quitAndInstall", () => {
     expect(() => response.parse({ started: false })).toThrow();
   });
 });
+
+describe("auth:clearToken", () => {
+  const { request, response } = ipcContract["auth:clearToken"];
+
+  it("accepts a void request", () => {
+    expect(() => request.parse(undefined)).not.toThrow();
+  });
+
+  it("only accepts cleared: true as response", () => {
+    expect(response.parse({ cleared: true })).toEqual({ cleared: true });
+    expect(() => response.parse({ cleared: false })).toThrow();
+  });
+});

@@ -4,9 +4,14 @@
     <meta charset="UTF-8" />
     <title>myVNG Agent Desktop</title>
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <!--
+      connect-src allows the agent backend (https) plus localhost/ws for the
+      dev server + local API. Tighten `https:` to the exact API origin as
+      part of the release checklist. img/media allow agent-served content.
+    -->
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; media-src https:; connect-src 'self' https: http://localhost:* ws://localhost:*; font-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src 'none'"
     />
   </head>
 

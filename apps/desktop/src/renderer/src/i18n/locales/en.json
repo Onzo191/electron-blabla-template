@@ -1,0 +1,249 @@
+{
+  "chatbot": {
+    "search": {
+      "title": "Search for messages within this chat",
+      "loading": "Searching for messages",
+      "notFound": "Sorry, we couldn't <br>find any results"
+    },
+    "chat": {
+      "newChat": "New chat",
+      "askAnything": "Ask anything",
+      "welcome": "{{value1}}, {{value2}} 👋 How can I help you?",
+      "networkError": "Oops, looks like a technical issue has happened! Please try refreshing the conversation or try again later",
+      "disclaimer": "Consider verifying information with attached documents or relevant departments.",
+      "relatedContent": "Related content",
+      "reference": "Reference",
+      "textWaiting": "Searching for relevant information. Please wait a moment...",
+      "submitRequest": "Submit request"
+    },
+    "loading-reply": {
+      "holdOn": "Hold on, I’m working on it…",
+      "takeMoment": "This might take a moment"
+    },
+    "feedback": {
+      "recommend": {
+        "notHelpful": "Not helpful",
+        "inaccurate": "Inaccurate",
+        "outOfDate": "Out of date information"
+      },
+      "success": "Your feedback’s been submitted successfully. Thank you for sharing your thoughts 💕"
+    },
+    "popupConfirm": {
+      "title": "Are you sure you want to start a new chat?",
+      "desc": "This action will permanently <b>delete</b> all your current conversation threads."
+    },
+    "text": {
+      "seeLatest": "See the latest chat"
+    },
+    "networkError": {
+      "labelError": "Unable to send this message. Please try again later."
+    },
+    "topic": {
+      "recommend": {
+        "one": "Information about the Health Insurance Program 2023 - 2024",
+        "two": "Printer setup",
+        "three": "OpenVPN connection guide",
+        "four": "Connect to WiFi VNG Corp"
+      }
+    },
+    "alert": {
+      "serverError": "An unexpected error has occurred. To continue the conversation, please click the orange \"New Chat\" button at the bottom of the typing bar."
+    }
+  },
+  "aiAgents": {
+    "chat": {
+      "greeting": "Hi {{value1}}, how can I help you?",
+      "scrollToBottom": "Scroll to latest messages",
+      "aiDisclaimer": "AI-generated content may be incorrect",
+      "webSearchChipWebOn": "+ Browse web",
+      "webSearchChipKbOnly": "Internal KB only",
+      "webSearchPopoverTitleWebOn": "Browse web + internal KB",
+      "webSearchPopoverDescWebOn": "Prioritizes internal knowledge base. Searches the web only when internal sources don't have the answer, or when your question needs both.",
+      "webSearchPopoverActionWebOn": "Click to use internal KB only",
+      "webSearchPopoverTitleKbOnly": "Internal KB only",
+      "webSearchPopoverDescKbOnly": "Answers strictly from VNG's internal knowledge base. No web access.",
+      "webSearchPopoverActionKbOnly": "Click to also browse the web when needed",
+      "webSearch": "Web Search",
+      "webSearchInlineHint": "Used only when needed",
+      "webSearchPlaceholder": "Search the web",
+      "attachmentProcessingFailed": "Couldn't process this file",
+      "dropFilesToUpload": "Drop files to upload",
+      "attachFile": "Attach file",
+      "voiceInput": "Voice input",
+      "sendMessage": "Send",
+      "stopGenerating": "Stop generating",
+      "maxAttachmentsReached": "You can attach up to {{value1}} files per message",
+      "tooManyAttachments": "Too many files selected. Max is {{value1}} files ({{value2}} slot(s) left).",
+      "attachmentTooLarge": "One or more files exceed {{value1}}MB.",
+      "attachmentFileNotSupported": "File type is not supported",
+      "attachmentFileTooLarge": "File exceeds {{value1}}MB limit",
+      "supportedFileTypes": "Supported file types: {{value1}}",
+      "tooManyAttachmentsSimple": "You can only attach up to {{value1}} files per message.",
+      "conversationAttachmentLimitReached": "This conversation already has {{value1}} files. Please switch to another conversation to continue uploading.",
+      "conversationAttachmentLimitHint": "Maximum files reached for this conversation. Switch to another conversation to continue uploading.",
+      "imageUnavailableTitle": "Image unavailable",
+      "imageUnavailableDescription": "This image has expired. Please reload the page.",
+      "imageRefreshingTitle": "Loading image...",
+      "imageRefreshingDescription": "Please wait a moment",
+      "sensitiveImageTitle": "Sensitive content",
+      "sensitiveImageDescription": "Click to view image",
+      "menuTools": "Tools",
+      "menuAgents": "Agents",
+      "menuUploadFile": "Upload file",
+      "menuWebSearch": "Web search",
+      "menuConnectors": "Connections",
+      "connectorConnect": "Connect",
+      "connectorReconnect": "Reconnect",
+      "connectorDisconnect": "Disconnect",
+      "connectorEnableTooltip": "Enable this connector",
+      "connectorDisableTooltip": "Disable this connector",
+      "mcpToggleError": "Failed to update connector status. Please try again.",
+      "mcpConnectError": "Connection failed. Please try again.",
+      "mcpDisconnectError": "Failed to disconnect. Please try again.",
+      "mcpDisconnectSuccess": "Disconnected successfully.",
+      "mcpConnectSuccess": "Connected successfully.",
+      "mcpConnectChooseSite": "Connected! Please select a Jira site to continue.",
+      "mcpError_missingParams": "Authentication failed. Missing required parameters.",
+      "mcpError_expiredState": "Session timed out. Please try again.",
+      "mcpError_tokenFailed": "Token exchange failed. Please check your configuration.",
+      "mcpError_accessDenied": "Connection cancelled. Please try again if you want to connect.",
+      "connectorsDirectory": "Connectors Directory",
+      "manageConnectors": "Manage connectors",
+      "viewAllConnectors": "View all connectors",
+      "directoryTitle": "Connectors",
+      "connectorsTab": "Connectors",
+      "availableConnections": "Available connections",
+      "yourConnectors": "Your connectors",
+      "availableConnectors": "Available connectors",
+      "searchConnectorsPlaceholder": "Search...",
+      "noConnectorsFound": "No connectors found.",
+      "noDescription": "No description provided.",
+      "statusConnected": "Connected",
+      "statusExpired": "Connection issue",
+      "statusNotConnected": "Not connected",
+      "filterAll": "All"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "conversation": {
+      "newConversation": "New Conversation"
+    },
+    "agent": {
+      "defaultName": "Agent name",
+      "inactiveMessage": "This agent is currently inactive. Please contact the administrator for more information."
+    },
+    "promptLibrary": {
+      "title": "Suggestion Library",
+      "viewAllInTopic": "View all in {{value1}}",
+      "allTopics": "All Topics",
+      "uncategorized": "Uncategorized",
+      "searchPlaceholder": "Search prompts",
+      "noPromptsFound": "No prompts found"
+    },
+    "sidebar": {
+      "title": "Agents",
+      "expandSidebar": "Expand sidebar",
+      "collapseSidebar": "Collapse sidebar",
+      "collapsePanel": "Collapse panel",
+      "failedToLoadDefaultAgent": "Failed to load default agent",
+      "chat": "Chat",
+      "agents": "Agents",
+      "noAgentsFound": "No agents found",
+      "conversations": "Conversations",
+      "noConversationsFound": "No conversations found",
+      "showMore": "Show more ({{value1}})",
+      "showLess": "Show less",
+      "conversationActions": "Conversation actions",
+      "deleteConversationTitle": "Delete conversation?",
+      "deleteConversationDesc": "This action cannot be undone.",
+      "conversationDeleted": "Conversation deleted",
+      "failedToDeleteConversation": "Failed to delete conversation",
+      "renameConversation": "Rename conversation",
+      "renamePlaceholder": "Enter new name...",
+      "conversationRenamed": "Conversation renamed successfully",
+      "failedToRenameConversation": "Failed to rename conversation",
+      "searchConversationsPlaceholder": "Search conversations...",
+      "pinned": "Pinned",
+      "recents": "Recents",
+      "noPinnedConversations": "No pinned conversations",
+      "pin": "Pin",
+      "unpin": "Unpin",
+      "conversationPinned": "Conversation pinned",
+      "conversationUnpinned": "Conversation unpinned",
+      "failedToPinConversation": "Failed to pin conversation",
+      "failedToUnpinConversation": "Failed to unpin conversation"
+    },
+    "message": {
+      "copiedToClipboard": "Copied to clipboard",
+      "error": "Error",
+      "errorBadRequest": "Couldn't process this",
+      "errorBadRequestDesc": "Please check your query or attachments and try again.",
+      "errorUnauthorized": "Session expired",
+      "errorUnauthorizedDesc": "Your session has expired. Please log in again.",
+      "errorForbidden": "No access permission",
+      "errorForbiddenDesc": "You do not have permission to access this agent.",
+      "errorTooManyRequests": "Too many requests",
+      "errorTooManyRequestsDesc": "The system is receiving a high number of requests right now. Please wait a moment and try again.",
+      "errorServerError": "Something went wrong",
+      "errorServerErrorDesc": "We're having trouble on our end. Please try again later or contact support.",
+      "tryAgainLater": "Please try again later",
+      "copy": "Copy",
+      "download": "Download",
+      "downloadAs": "Download as",
+      "exportFailed": "Failed to export file",
+      "like": "Like",
+      "more": "More",
+      "less": "Less",
+      "dislike": "Dislike",
+      "reasoning": "Reasoning",
+      "responseTime": "Responded in {{value1}}s"
+    },
+    "block": {
+      "attachments": "Attachments",
+      "supportContact": "Support",
+      "references": "References",
+      "suggestion": "Suggestions",
+      "colleague": "Colleagues",
+      "exportArtifact": "Exported file"
+    },
+    "exportArtifact": {
+      "view": "View exported file",
+      "download": "Download exported file",
+      "untitled": "Untitled export"
+    },
+    "feedback": {
+      "title": "Provide Feedback",
+      "label": "Feedback",
+      "sending": "Sending...",
+      "failedToSubmit": "Failed to submit feedback"
+    },
+    "actions": {
+      "newChat": "New Chat"
+    },
+    "colleagueCard": {
+      "phone": "Phone",
+      "email": "Email",
+      "department": "Department",
+      "lineManager": "Line Manager",
+      "viewProfile": "View profile of {{value1}}",
+      "searchContact": "Support contact information for {{value1}}"
+    },
+    "filesDrawer": {
+      "title": "Files",
+      "empty": "No files yet",
+      "close": "Close drawer",
+      "artifactFile": "artifact",
+      "untitled": "Untitled"
+    },
+    "common": {
+      "cancel": "Cancel",
+      "retry": "Retry",
+      "save": "Save",
+      "delete": "Delete",
+      "close": "Close",
+      "offline": "No internet connection. Check your network and try again."
+    }
+  }
+}

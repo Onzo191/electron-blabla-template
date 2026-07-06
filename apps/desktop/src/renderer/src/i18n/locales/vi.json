@@ -1,0 +1,249 @@
+{
+  "chatbot": {
+    "search": {
+      "title": "Tìm kiếm tin nhắn trong cuộc trò chuyện này",
+      "loading": "Đang tìm kiếm tin nhắn",
+      "notFound": "Xin lỗi, chúng tôi không thể <br> tìm thấy bất kỳ kết quả nào"
+    },
+    "chat": {
+      "newChat": "Cuộc trò chuyện mới",
+      "askAnything": "Hỏi bất kỳ điều gì",
+      "welcome": "{{value1}}, {{value2}} 👋 Tôi có thể giúp được gì cho bạn?",
+      "networkError": "Rất tiếc, có vẻ như đã xảy ra sự cố kỹ thuật! Vui lòng thử làm mới cuộc trò chuyện hoặc thử lại sau.",
+      "disclaimer": "Cân nhắc xác minh thông tin bằng tài liệu đính kèm với các phòng ban liên quan",
+      "relatedContent": "Nội dung liên quan",
+      "reference": "Tham khảo",
+      "textWaiting": "Đang tìm kiếm câu trả lời phù hợp. Vui lòng chờ đợi...",
+      "submitRequest": "Gửi yêu cầu"
+    },
+    "loading-reply": {
+      "holdOn": "Chờ một chút, tôi đang xử lý...",
+      "takeMoment": "Bạn vui lòng đợi một chút nhé"
+    },
+    "feedback": {
+      "recommend": {
+        "notHelpful": "Chưa hữu ích",
+        "inaccurate": "Chưa chính xác",
+        "outOfDate": "Thông tin chưa được cập nhật"
+      },
+      "success": "Phản hồi của bạn đã được gửi thành công. Cảm ơn bạn đã chia sẻ ý kiến của mình 💕"
+    },
+    "popupConfirm": {
+      "title": "Bạn có chắc chắn muốn bắt đầu một cuộc trò chuyện mới?",
+      "desc": "Hành động này sẽ <b>xóa</b> vĩnh viễn tất cả chuỗi cuộc trò chuyện hiện tại của bạn."
+    },
+    "text": {
+      "seeLatest": "Xem cuộc trò chuyện mới nhất"
+    },
+    "networkError": {
+      "labelError": "Không thể gửi tin nhắn này. Vui lòng thử lại sau."
+    },
+    "topic": {
+      "recommend": {
+        "one": "Thông tin về chương trình Bảo hiểm sức khỏe 2023 -2024",
+        "two": "Cài đặt máy in",
+        "three": "Hướng dẫn kết nối OpenVPN",
+        "four": "Kết nối đến WiFi VNG Corp"
+      }
+    },
+    "alert": {
+      "serverError": "Đã có sự cố nhỏ xảy ra. Để tiếp tục cuộc trò chuyện, vui lòng nhấn nút \"Cuộc trò chuyện mới\" màu cam ở thanh gõ phía dưới."
+    }
+  },
+  "aiAgents": {
+    "chat": {
+      "greeting": "Xin chào {{value1}}, tôi có thể giúp gì cho bạn?",
+      "scrollToBottom": "Cuộn xuống tin nhắn mới nhất",
+      "aiDisclaimer": "Nội dung do AI tạo ra có thể không chính xác",
+      "webSearchChipWebOn": "+ Tìm web",
+      "webSearchChipKbOnly": "Chỉ KB nội bộ",
+      "webSearchPopoverTitleWebOn": "Tìm web + KB nội bộ",
+      "webSearchPopoverDescWebOn": "Ưu tiên KB nội bộ. Chỉ tìm web khi nguồn nội bộ không có câu trả lời, hoặc khi câu hỏi cần cả hai nguồn.",
+      "webSearchPopoverActionWebOn": "Nhấn để chỉ dùng KB nội bộ",
+      "webSearchPopoverTitleKbOnly": "Chỉ KB nội bộ",
+      "webSearchPopoverDescKbOnly": "Chỉ trả lời từ KB nội bộ của VNG. Không truy cập internet.",
+      "webSearchPopoverActionKbOnly": "Nhấn để bật thêm tìm web khi cần",
+      "webSearch": "Tìm trên Web",
+      "webSearchInlineHint": "Chỉ dùng khi cần",
+      "webSearchPlaceholder": "Tìm kiếm web",
+      "attachmentProcessingFailed": "Không thể xử lý tệp này",
+      "dropFilesToUpload": "Thả tệp để tải lên",
+      "attachFile": "Đính kèm tệp",
+      "voiceInput": "Nhập bằng giọng nói",
+      "sendMessage": "Gửi",
+      "stopGenerating": "Dừng tạo",
+      "maxAttachmentsReached": "Bạn chỉ có thể đính kèm tối đa {{value1}} tệp cho mỗi tin nhắn",
+      "tooManyAttachments": "Bạn đã chọn quá nhiều tệp. Tối đa {{value1}} tệp (còn {{value2}} chỗ trống).",
+      "attachmentTooLarge": "Một hoặc nhiều tệp vượt quá {{value1}}MB.",
+      "attachmentFileNotSupported": "Định dạng tệp không được hỗ trợ",
+      "attachmentFileTooLarge": "Tệp vượt quá giới hạn {{value1}}MB",
+      "supportedFileTypes": "Các loại tệp được hỗ trợ: {{value1}}",
+      "tooManyAttachmentsSimple": "Bạn chỉ có thể đính kèm tối đa {{value1}} tệp cho mỗi tin nhắn.",
+      "conversationAttachmentLimitReached": "Cuộc trò chuyện này đã có {{value1}} tệp. Vui lòng chuyển sang cuộc trò chuyện khác để tiếp tục tải lên.",
+      "conversationAttachmentLimitHint": "Đã đạt số tệp tối đa cho cuộc trò chuyện này. Hãy chuyển sang cuộc trò chuyện khác để tiếp tục tải lên.",
+      "imageUnavailableTitle": "Ảnh không khả dụng",
+      "imageUnavailableDescription": "Ảnh đã hết hạn, vui lòng tải lại trang.",
+      "imageRefreshingTitle": "Đang tải ảnh...",
+      "imageRefreshingDescription": "Vui lòng chờ trong giây lát",
+      "sensitiveImageTitle": "Nội dung nhạy cảm",
+      "sensitiveImageDescription": "Nhấn để xem ảnh",
+      "menuTools": "Công cụ",
+      "menuAgents": "Trợ lý",
+      "menuUploadFile": "Đính kèm tệp",
+      "menuWebSearch": "Tìm kiếm web",
+      "menuConnectors": "Kết nối",
+      "connectorConnect": "Kết nối",
+      "connectorReconnect": "Kết nối lại",
+      "connectorDisconnect": "Ngắt kết nối",
+      "connectorEnableTooltip": "Bật kết nối này",
+      "connectorDisableTooltip": "Tắt kết nối này",
+      "mcpToggleError": "Không thể cập nhật trạng thái kết nối. Vui lòng thử lại.",
+      "mcpConnectError": "Kết nối thất bại. Vui lòng thử lại.",
+      "mcpDisconnectError": "Ngắt kết nối thất bại. Vui lòng thử lại.",
+      "mcpDisconnectSuccess": "Ngắt kết nối thành công.",
+      "mcpConnectSuccess": "Kết nối thành công.",
+      "mcpConnectChooseSite": "Kết nối thành công! Vui lòng chọn site Jira để tiếp tục.",
+      "mcpError_missingParams": "Xác thực thất bại. Thiếu tham số cần thiết.",
+      "mcpError_expiredState": "Phiên đăng nhập hết hạn. Vui lòng thử lại.",
+      "mcpError_tokenFailed": "Trao đổi token thất bại. Vui lòng kiểm tra cấu hình.",
+      "mcpError_accessDenied": "Kết nối bị từ chối. Thử lại nếu bạn muốn kết nối.",
+      "connectorsDirectory": "Thư mục kết nối",
+      "manageConnectors": "Quản lý kết nối",
+      "viewAllConnectors": "Xem tất cả kết nối",
+      "directoryTitle": "Kết nối",
+      "connectorsTab": "Kết nối",
+      "availableConnections": "Các kết nối khả dụng",
+      "yourConnectors": "Kết nối của bạn",
+      "availableConnectors": "Kết nối khả dụng",
+      "searchConnectorsPlaceholder": "Tìm kiếm...",
+      "noConnectorsFound": "Không tìm thấy kết nối nào.",
+      "noDescription": "Không có mô tả.",
+      "statusConnected": "Đã kết nối",
+      "statusExpired": "Lỗi kết nối",
+      "statusNotConnected": "Chưa kết nối",
+      "filterAll": "Tất cả"
+    },
+    "status": {
+      "active": "Đang hoạt động",
+      "inactive": "Không hoạt động"
+    },
+    "conversation": {
+      "newConversation": "Cuộc trò chuyện mới"
+    },
+    "agent": {
+      "defaultName": "Tên trợ lý",
+      "inactiveMessage": "Trợ lý này hiện không hoạt động. Vui lòng liên hệ quản trị viên để biết thêm thông tin."
+    },
+    "promptLibrary": {
+      "title": "Thư viện gợi ý",
+      "viewAllInTopic": "Xem tất cả trong {{value1}}",
+      "allTopics": "Tất cả",
+      "uncategorized": "Chưa phân loại",
+      "searchPlaceholder": "Tìm kiếm prompt",
+      "noPromptsFound": "Không tìm thấy prompt nào"
+    },
+    "sidebar": {
+      "title": "Trợ lý",
+      "expandSidebar": "Mở rộng thanh bên",
+      "collapseSidebar": "Thu gọn thanh bên",
+      "collapsePanel": "Thu gọn bảng điều khiển",
+      "failedToLoadDefaultAgent": "Không thể tải trợ lý mặc định",
+      "chat": "Trò chuyện",
+      "agents": "Trợ lý",
+      "noAgentsFound": "Không tìm thấy trợ lý nào",
+      "conversations": "Cuộc trò chuyện",
+      "noConversationsFound": "Không tìm thấy cuộc trò chuyện nào",
+      "showMore": "Xem thêm ({{value1}})",
+      "showLess": "Thu gọn",
+      "conversationActions": "Tùy chọn cuộc trò chuyện",
+      "deleteConversationTitle": "Xóa cuộc trò chuyện?",
+      "deleteConversationDesc": "Hành động này không thể hoàn tác.",
+      "conversationDeleted": "Đã xóa cuộc trò chuyện",
+      "failedToDeleteConversation": "Không thể xóa cuộc trò chuyện",
+      "renameConversation": "Đổi tên cuộc trò chuyện",
+      "renamePlaceholder": "Nhập tên mới...",
+      "conversationRenamed": "Đổi tên cuộc trò chuyện thành công",
+      "failedToRenameConversation": "Không thể đổi tên cuộc trò chuyện",
+      "searchConversationsPlaceholder": "Tìm cuộc trò chuyện...",
+      "pinned": "Đã ghim",
+      "recents": "Gần đây",
+      "noPinnedConversations": "Chưa có cuộc trò chuyện nào được ghim",
+      "pin": "Ghim",
+      "unpin": "Bỏ ghim",
+      "conversationPinned": "Đã ghim cuộc trò chuyện",
+      "conversationUnpinned": "Đã bỏ ghim cuộc trò chuyện",
+      "failedToPinConversation": "Không thể ghim cuộc trò chuyện",
+      "failedToUnpinConversation": "Không thể bỏ ghim cuộc trò chuyện"
+    },
+    "message": {
+      "copiedToClipboard": "Đã sao chép vào clipboard",
+      "error": "Lỗi",
+      "errorBadRequest": "Không thể xử lý yêu cầu",
+      "errorBadRequestDesc": "Bạn vui lòng kiểm tra lại nội dung hoặc tệp đính kèm rồi thử lại nhé.",
+      "errorUnauthorized": "Đã hết phiên đăng nhập",
+      "errorUnauthorizedDesc": "Phiên làm việc của bạn đã kết thúc. Vui lòng đăng nhập lại để tiếp tục.",
+      "errorForbidden": "Không có quyền truy cập",
+      "errorForbiddenDesc": "Bạn chưa có quyền truy cập vào Agent này.",
+      "errorTooManyRequests": "Quá nhiều yêu cầu",
+      "errorTooManyRequestsDesc": "Hệ thống đang nhận nhiều yêu cầu cùng lúc. Vui lòng đợi trong giây lát và thử lại.",
+      "errorServerError": "Đã xảy ra sự cố",
+      "errorServerErrorDesc": "Hệ thống đang gặp chút vấn đề. Vui lòng thử lại sau hoặc liên hệ bộ phận hỗ trợ.",
+      "tryAgainLater": "Vui lòng thử lại sau",
+      "copy": "Sao chép",
+      "download": "Tải xuống",
+      "downloadAs": "Tải dưới dạng",
+      "exportFailed": "Không thể xuất file",
+      "like": "Thích",
+      "more": "Xem thêm",
+      "less": "Ẩn bớt",
+      "dislike": "Không thích",
+      "reasoning": "Suy luận",
+      "responseTime": "Phản hồi trong {{value1}}s"
+    },
+    "block": {
+      "attachments": "File đính kèm",
+      "supportContact": "Hỗ trợ",
+      "references": "Nguồn tham khảo",
+      "suggestion": "Gợi ý",
+      "colleague": "Đồng nghiệp",
+      "exportArtifact": "File đã xuất"
+    },
+    "exportArtifact": {
+      "view": "Xem file đã xuất",
+      "download": "Tải file đã xuất",
+      "untitled": "File xuất chưa đặt tên"
+    },
+    "feedback": {
+      "title": "Gửi phản hồi",
+      "label": "Phản hồi",
+      "sending": "Đang gửi...",
+      "failedToSubmit": "Không thể gửi phản hồi"
+    },
+    "actions": {
+      "newChat": "Chat mới"
+    },
+    "colleagueCard": {
+      "phone": "Điện thoại",
+      "email": "Email",
+      "department": "Bộ phận",
+      "lineManager": "Quản lý",
+      "viewProfile": "Xem profile của {{value1}}",
+      "searchContact": "Thông tin liên hệ hỗ trợ  {{value1}}"
+    },
+    "filesDrawer": {
+      "title": "Tệp",
+      "empty": "Chưa có tệp nào",
+      "close": "Đóng ngăn",
+      "artifactFile": "tệp",
+      "untitled": "Chưa đặt tên"
+    },
+    "common": {
+      "cancel": "Hủy",
+      "retry": "Thử lại",
+      "save": "Lưu",
+      "delete": "Xóa",
+      "close": "Đóng",
+      "offline": "Mất kết nối mạng. Vui lòng kiểm tra đường truyền và thử lại."
+    }
+  }
+}

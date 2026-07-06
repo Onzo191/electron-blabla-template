@@ -53,6 +53,9 @@ Playwright. Node 24, pnpm 10 only (npm/yarn are blocked by hooks).
 - Architecture, data flow, ADRs: `docs/architecture.md`
 - UI stack (Chakra-vs-Tailwind split, tokens, dark mode):
   `docs/ui-guidelines.md`
+- Chat feature (streaming lifecycle, chatSlice, widget pipeline, query/
+  invalidation matrix, error taxonomy, i18n): `docs/chat-feature.md`;
+  product spec in `docs/ai-agents-spec/`
 - Release/CI/CD: self-hosted GitLab pipeline, store vs. direct-download
   channels, code signing, forced-update policy: `docs/release-cicd.md`
 - Release runbook: environments/accounts to provision, store submission

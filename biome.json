@@ -14,7 +14,8 @@
       "!**/test-results",
       "!**/playwright-report",
       "!**/*.svg",
-      "!**/routeTree.gen.ts"
+      "!**/routeTree.gen.ts",
+      "!docs/ai-agents-spec"
     ]
   },
   "formatter": {

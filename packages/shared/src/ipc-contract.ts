@@ -23,6 +23,10 @@ export const ipcContract = {
     request: z.void(),
     response: z.object({ token: z.string().nullable() }),
   },
+  "auth:clearToken": {
+    request: z.void(),
+    response: z.object({ cleared: z.literal(true) }),
+  },
   "log:write": {
     request: z.object({
       level: z.enum(["error", "warn", "info", "debug"]),

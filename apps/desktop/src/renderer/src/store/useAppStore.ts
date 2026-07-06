@@ -1,3 +1,7 @@
+import {
+  type ChatSlice,
+  createChatSlice,
+} from "@renderer/features/chat/store/chatSlice";
 import { create } from "zustand";
 import {
   createUiSlice,
@@ -5,10 +9,11 @@ import {
   type UiSlice,
 } from "./slices/uiSlice";
 
-export type AppStore = UiSlice;
+export type AppStore = UiSlice & ChatSlice;
 
 export const useAppStore = create<AppStore>()((...args) => ({
   ...createUiSlice(...args),
+  ...createChatSlice()(...args),
 }));
 
 // Apply the initial resolved theme to the DOM (createUiSlice only sets state)

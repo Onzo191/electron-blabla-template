@@ -1,3 +1,10 @@
+export { initConversation } from "./api/conversations";
 export { conversationKeys } from "./api/keys";
-export { ConversationList } from "./components/ConversationList";
-export { useConversations } from "./hooks/useConversations";
+export {
+  conversationListInfiniteOptions,
+  pinnedConversationsOptions,
+} from "./api/options";
+export { ConversationSidebarList } from "./components/ConversationSidebarList";
+export { useConversationActions } from "./hooks/useConversationActions";
+export { useConversationsInfinite } from "./hooks/useConversationsInfinite";
+export { usePinnedConversations } from "./hooks/usePinnedConversations";
