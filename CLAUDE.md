@@ -55,6 +55,9 @@ Playwright. Node 24, pnpm 10 only (npm/yarn are blocked by hooks).
   `docs/ui-guidelines.md`
 - Release/CI/CD: self-hosted GitLab pipeline, store vs. direct-download
   channels, code signing, forced-update policy: `docs/release-cicd.md`
+- Release runbook: environments/accounts to provision, store submission
+  steps, update-automation flow, version-policy service decision:
+  `docs/release-runbook.md`
 - Third-party skill policy & compression rules: `docs/claude-code-skills.md`
 - Project skills:
   - `/add-ipc-channel` — schema in contract → handler in main → call via

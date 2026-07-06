@@ -4,7 +4,10 @@ Target state for shipping the desktop app: source on self-hosted GitLab
 (not GitHub), dual distribution (app stores + direct download), and an
 update flow that supports both a soft "update available" nudge and a hard
 mandatory update. This doc is the source of truth for that pipeline;
-`agent-desktop-app-plan.md` Phase 6 points here for detail.
+`agent-desktop-app-plan.md` Phase 6 points here for detail. For the
+operational side — environments/accounts to provision, store submission
+steps, and the version-policy service decision — see
+[`docs/release-runbook.md`](./release-runbook.md).
 
 ---
 
@@ -171,12 +174,12 @@ need provisioning.
 ### 4.2 Pipeline stages
 
 ```
-check ──► build (smoke, unsigned) ──► release (tag-gated, manual approval)
+check ──► build (smoke, unsigned) ──► release (tag-gated: direct channel automatic, store channel manual)
 ```
 
 - **`check`** — every push/MR, Linux runner: `pnpm install --frozen-lockfile && pnpm check`. Direct port of today's `.github/workflows/check.yml`.
 - **`build`** — every push/MR, mac + windows runners: unsigned packaging (`CSC_IDENTITY_AUTO_DISCOVERY=false`), proves the app still packages on both OSes. Direct port of today's `.github/workflows/build.yml`. Fast feedback, doesn't need secrets.
-- **`release`** — only on version tags (`v*`) pushed to `main`, one job per (platform × channel): `release:mac-direct`, `release:mac-mas`, `release:win-direct`, `release:win-store`. Each: real signing + notarization, uploads artifacts, and for the direct channel also **publishes the update feed** (Section 5). Store jobs (`mas`, `appx`) are `when: manual` — App Store/Partner Center submission needs metadata/screenshots managed by a human in the respective console anyway, so CI produces the signed binary and a human triggers/verifies the actual submission (via `fastlane deliver` for MAS, Partner Center Submission API or manual upload for the Store).
+- **`release`** — only on version tags (`v*`) pushed to `main`, one job per (platform × channel): `release:mac-direct`, `release:mac-mas`, `release:win-direct`, `release:win-store`. Each: real signing + notarization, uploads artifacts, and for the direct channel also **publishes the update feed** (Section 5). `release:mac-direct`, `release:win-direct`, and `release:publish-update-feed` run **automatically** the moment the tag lands — the tag push is already the deliberate "ship this" action, so there's no manual click in the direct channel. Store jobs (`mas`, `appx`) stay `when: manual` — App Store/Partner Center submission needs metadata/screenshots managed by a human in the respective console anyway, so CI produces the signed binary and a human triggers/verifies the actual submission (via `fastlane deliver` for MAS, Partner Center Submission API or manual upload for the Store).
 
 A draft `.gitlab-ci.yml` implementing `check` + `build` (the parts that
 need no secrets or store accounts yet) is checked into the repo root; the

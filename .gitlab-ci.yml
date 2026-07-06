@@ -1,8 +1,11 @@
 # Self-hosted GitLab CI/CD. Mirrors .github/workflows/{check,build}.yml —
 # remove those once this pipeline is verified end to end (see
 # docs/release-cicd.md). `release` is stubbed until runners/certs/store
-# accounts are provisioned; its jobs are `when: manual` and will fail
-# fast with a clear message until then.
+# accounts are provisioned — the direct-channel jobs run automatically on
+# every version tag (a tag push is already the deliberate "ship this"
+# action) and will fail fast with a clear TODO message until then. Store
+# jobs stay `when: manual` even once secrets exist — see docs/release-runbook.md
+# Section 3 for why (Apple/Microsoft require a human in their console).
 
 stages:
   - check
@@ -61,10 +64,14 @@ build:win:
 
 # --- release: real signing + notarization + (for direct) update-feed
 # publish. Tag-gated (vX.Y.Z on main) so a routine push never accidentally
-# ships a release. Store jobs are manual on top of that — App Store /
-# Microsoft Store submission needs a human in the respective console
-# anyway. See docs/release-cicd.md Sections 3-7 for the secrets each of
-# these needs (Secure Files + protected CI/CD variables). ---
+# ships a release. The direct-channel chain (mac-direct, win-direct,
+# publish-update-feed) runs automatically the moment a version tag lands —
+# no manual click, that's the whole point of this channel (docs/release-runbook.md
+# Section 5). Store jobs stay `when: manual` on top of the tag-gate — App
+# Store / Microsoft Store submission needs a human in the respective
+# console regardless of what CI does. See docs/release-cicd.md Sections
+# 3-7 for the secrets each of these needs (Secure Files + protected
+# CI/CD variables). ---
 
 release:mac-direct:
   stage: release
@@ -75,7 +82,6 @@ release:mac-direct:
     - exit 1
   rules:
     - if: $CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+$/
-      when: manual
 
 release:mac-mas:
   stage: release
@@ -97,7 +103,6 @@ release:win-direct:
     - exit 1
   rules:
     - if: $CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+$/
-      when: manual
 
 release:win-store:
   stage: release
@@ -119,7 +124,6 @@ release:publish-update-feed:
     - exit 1
   rules:
     - if: $CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+$/
-      when: manual
 
 # --- emergency: flip the forced-update policy (minSupportedVersion /
 # forceUpdate) WITHOUT building or signing anything. No code-signing certs
