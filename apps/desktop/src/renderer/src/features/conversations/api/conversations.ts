@@ -13,7 +13,7 @@ import {
 import { z } from "zod";
 
 export const CONVERSATIONS_PAGE_SIZE = 20;
-const PINNED_PAGE_SIZE = 50;
+const PINNED_PAGE_SIZE = 20;
 
 const unknownResponseSchema = z.unknown();
 

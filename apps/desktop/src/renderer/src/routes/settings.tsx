@@ -6,6 +6,7 @@ import { toaster } from "@renderer/shared/components/toaster";
 import { clearAuthToken, setAuthToken } from "@renderer/shared/lib/auth-token";
 import type { Theme } from "@renderer/store/slices/uiSlice";
 import { useAppStore } from "@renderer/store/useAppStore";
+import { useQueryClient } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
 import { useState } from "react";
@@ -28,6 +29,13 @@ function SettingsRoute(): React.JSX.Element {
   const setLanguage = useAppStore((state) => state.setLanguage);
   const [token, setToken] = useState("");
   const [saving, setSaving] = useState(false);
+  const queryClient = useQueryClient();
+
+  // Every backend query needs the fresh token — invalidate everything so
+  // the app retries immediately instead of requiring a manual reload.
+  const invalidateAll = (): void => {
+    void queryClient.invalidateQueries();
+  };
 
   const saveToken = async (): Promise<void> => {
     if (token.trim() === "") return;
@@ -35,6 +43,7 @@ function SettingsRoute(): React.JSX.Element {
     try {
       await setAuthToken(token.trim());
       setToken("");
+      invalidateAll();
       toaster.success({ title: "API token saved" });
     } catch {
       toaster.error({ title: "Failed to save token" });
@@ -47,6 +56,7 @@ function SettingsRoute(): React.JSX.Element {
     setSaving(true);
     try {
       await clearAuthToken();
+      invalidateAll();
       toaster.success({ title: "API token cleared" });
     } catch {
       toaster.error({ title: "Failed to clear token" });
