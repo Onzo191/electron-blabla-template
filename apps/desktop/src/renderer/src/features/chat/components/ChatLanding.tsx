@@ -6,8 +6,8 @@ import {
   useDefaultAgent,
 } from "@renderer/features/agents";
 import { useAppStore } from "@renderer/store/useAppStore";
-import { Link } from "@tanstack/react-router";
 import { KeyRound } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { NEW_CONVERSATION_DRAFT_KEY } from "../store/chatSlice";
 import { ChatActionsHost } from "./ChatActionsHost";
 import { ChatInput } from "./ChatInput";
@@ -15,16 +15,18 @@ import { StreamingBubble } from "./StreamingBubble";
 
 /** Shown when the agent can't be loaded — most commonly a missing/invalid token. */
 function NotReadyPrompt(): React.JSX.Element {
+  const { t } = useTranslation("aiAgents");
+  const openSettings = useAppStore((state) => state.openSettings);
+
   return (
     <div className="flex flex-col items-center gap-3 text-center">
       <KeyRound size={28} className="text-text-faint" />
-      <p className="text-sm font-medium">Couldn't load the assistant</p>
+      <p className="text-sm font-medium">{t("chat.notReadyTitle")}</p>
       <p className="max-w-sm text-sm text-text-muted">
-        This usually means the API token isn't set yet. Add it in Settings, then
-        come back here.
+        {t("chat.notReadyDescription")}
       </p>
-      <Button asChild size="sm">
-        <Link to="/settings">Go to Settings</Link>
+      <Button size="sm" onClick={() => openSettings("account")}>
+        {t("chat.notReadyAction")}
       </Button>
     </div>
   );
@@ -55,8 +57,11 @@ export function ChatLanding(): React.JSX.Element {
   return (
     <ChatActionsHost draftKey={NEW_CONVERSATION_DRAFT_KEY}>
       <div className="flex h-full flex-col">
-        <div className="min-h-0 flex-1 overflow-y-auto px-4">
-          <div className="mx-auto flex h-full max-w-3xl flex-col justify-center gap-6 py-8">
+        <div className="mx-auto flex h-full w-full max-w-content flex-col px-4">
+          {/* Golden-section split: the hero settles at ~38.2% down rather
+              than dead center (docs/design-system.md). */}
+          <div className="grow-[0.382]" aria-hidden />
+          <div className="flex min-h-0 shrink flex-col items-center gap-6 overflow-y-auto py-8">
             {newStreamHere ? (
               <StreamingBubble />
             ) : notReady ? (
@@ -79,6 +84,7 @@ export function ChatLanding(): React.JSX.Element {
               </div>
             )}
           </div>
+          <div className="grow-[0.618]" aria-hidden />
         </div>
         <ChatInput
           draftKey={NEW_CONVERSATION_DRAFT_KEY}

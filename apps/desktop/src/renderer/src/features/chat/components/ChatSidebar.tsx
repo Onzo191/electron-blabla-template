@@ -1,4 +1,4 @@
-import { IconButton } from "@chakra-ui/react";
+import { Button, IconButton } from "@chakra-ui/react";
 import { AgentPicker, useDefaultAgent } from "@renderer/features/agents";
 import { ConversationSidebarList } from "@renderer/features/conversations";
 import { useAppStore } from "@renderer/store/useAppStore";
@@ -12,6 +12,7 @@ export function ChatSidebar(): React.JSX.Element {
   const { t } = useTranslation("aiAgents");
   const selectedAgent = useAppStore((state) => state.selectedAgent);
   const setSelectedAgent = useAppStore((state) => state.setSelectedAgent);
+  const openSettings = useAppStore((state) => state.openSettings);
   const defaultAgentQuery = useDefaultAgent();
   const prefetchConversation = usePrefetchConversation();
 
@@ -24,7 +25,7 @@ export function ChatSidebar(): React.JSX.Element {
   }, [selectedAgent, defaultAgent, setSelectedAgent]);
 
   return (
-    <aside className="flex h-full w-64 shrink-0 flex-col border-r border-border-subtle bg-surface-100">
+    <aside className="flex h-full min-w-0 flex-col overflow-hidden border-r border-border-subtle bg-surface-100">
       <div className="flex items-center gap-1 p-2">
         <div className="min-w-0 flex-1">
           <AgentPicker
@@ -48,13 +49,17 @@ export function ChatSidebar(): React.JSX.Element {
       <ConversationSidebarList onItemHover={prefetchConversation} />
 
       <div className="border-t border-border-subtle p-2">
-        <Link
-          to="/settings"
-          className="flex items-center gap-2 rounded-md px-3 py-2 text-sm text-text-muted hover:bg-surface-200 hover:text-text"
+        <Button
+          size="sm"
+          variant="ghost"
+          justifyContent="flex-start"
+          width="full"
+          color="textMuted"
+          onClick={() => openSettings()}
         >
           <Settings size={15} />
-          Settings
-        </Link>
+          {t("settings.title")}
+        </Button>
       </div>
     </aside>
   );

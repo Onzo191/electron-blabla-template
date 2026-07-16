@@ -105,7 +105,7 @@ export function MessageList({
         aria-label={t("sidebar.conversations")}
         className="h-full overflow-y-auto px-4"
       >
-        <div className="mx-auto flex max-w-3xl flex-col gap-6 py-4">
+        <div className="mx-auto flex max-w-content flex-col gap-6 py-4">
           <div ref={topSentinelRef} className="h-px" aria-hidden />
           {isFetchingNextPage ? (
             <Skeleton height="10" width="70%" borderRadius="lg" />

@@ -53,6 +53,13 @@ export const ipcContract = {
     request: z.void(),
     response: z.object({ started: z.literal(true) }),
   },
+  // Windows-only: keeps the frameless titlebar's caption-button overlay
+  // (minimize/maximize/close) in sync with the renderer's resolved theme.
+  // No-op on other platforms.
+  "window:setTitleBarTheme": {
+    request: z.object({ theme: z.enum(["light", "dark"]) }),
+    response: z.object({ ok: z.literal(true) }),
+  },
 } as const;
 
 export type IpcContract = typeof ipcContract;

@@ -72,4 +72,30 @@ describe("uiSlice", () => {
     store.getState().syncSystemTheme();
     expect(store.getState().resolvedTheme).toBe("light");
   });
+
+  it("opens settings to the given section, defaulting to the current one", () => {
+    const store = setup();
+
+    store.getState().openSettings("account");
+    expect(store.getState()).toMatchObject({
+      settingsOpen: true,
+      settingsSection: "account",
+    });
+
+    store.getState().closeSettings();
+    store.getState().openSettings();
+    expect(store.getState()).toMatchObject({
+      settingsOpen: true,
+      settingsSection: "account",
+    });
+  });
+
+  it("closes settings", () => {
+    const store = setup();
+    store.getState().openSettings("about");
+
+    store.getState().closeSettings();
+
+    expect(store.getState().settingsOpen).toBe(false);
+  });
 });

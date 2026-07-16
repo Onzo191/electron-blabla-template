@@ -6,6 +6,7 @@ declare global {
     electron: ElectronAPI;
     api: {
       invoke: IpcInvoker;
+      platform: NodeJS.Platform;
     };
   }
 }

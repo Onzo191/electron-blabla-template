@@ -10,8 +10,9 @@ description: >
 
 # Build UI (Chakra UI v3 + Tailwind v4)
 
-Full rationale: `docs/ui-guidelines.md`. Enforced subset:
-`.claude/rules/ui.md`.
+Full rationale: `docs/ui-guidelines.md`. Token values, color scale, motion
+tokens, and golden-ratio layout guidance: `docs/design-system.md`.
+Enforced subset: `.claude/rules/ui.md`.
 
 ## Decide the owner first
 

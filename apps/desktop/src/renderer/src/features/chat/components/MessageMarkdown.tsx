@@ -101,7 +101,7 @@ export const MessageMarkdown = memo(function MessageMarkdown({
 }): React.JSX.Element {
   const blocks = useMemo(() => splitMarkdownBlocks(text), [text]);
   return (
-    <div className="chat-prose flex min-w-0 flex-col gap-3 text-[15px] leading-relaxed">
+    <div className="chat-prose flex min-w-0 flex-col gap-3 text-md leading-relaxed">
       {blocks.map((block, index) => (
         // biome-ignore lint/suspicious/noArrayIndexKey: blocks are append-only during a stream; index keys keep prior blocks stable
         <MarkdownBlock key={index} text={block} />

@@ -1,6 +1,7 @@
 import { Dialog, Portal } from "@chakra-ui/react";
 import type { MediaItem } from "@myvng/shared";
 import { GhostIconButton } from "@renderer/shared/components/GhostIconButton";
+import { DURATION } from "@renderer/shared/lib/motion";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { AnimatePresence, m } from "motion/react";
 import { useTranslation } from "react-i18next";
@@ -85,7 +86,7 @@ export function MediaLightbox({
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    transition={{ duration: 0.15 }}
+                    transition={{ duration: DURATION.normal }}
                     className="flex max-h-[85vh] max-w-[90vw] items-center justify-center"
                   >
                     {item.mediaType === "video" ? (

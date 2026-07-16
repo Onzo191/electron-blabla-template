@@ -53,6 +53,8 @@ Playwright. Node 24, pnpm 10 only (npm/yarn are blocked by hooks).
 - Architecture, data flow, ADRs: `docs/architecture.md`
 - UI stack (Chakra-vs-Tailwind split, tokens, dark mode):
   `docs/ui-guidelines.md`
+- Design system (color/type/spacing/radius/shadow/motion tokens, accent
+  theming, golden-ratio layout guidance): `docs/design-system.md`
 - Chat feature (streaming lifecycle, chatSlice, widget pipeline, query/
   invalidation matrix, error taxonomy, i18n): `docs/chat-feature.md`;
   product spec in `docs/ai-agents-spec/`

@@ -2,8 +2,10 @@
 
 The renderer uses two styling systems with a strict ownership split. This
 doc records what each owns, how they share design tokens, and how dark
-mode stays in sync. The enforceable subset lives in `.claude/rules/ui.md`;
-the hands-on workflow is the `/build-ui` skill.
+mode stays in sync. For the actual token values (color scale, type scale,
+motion, golden-ratio layout guidance) see `docs/design-system.md`. The
+enforceable subset lives in `.claude/rules/ui.md`; the hands-on workflow is
+the `/build-ui` skill.
 
 ## Why both
 
@@ -39,12 +41,13 @@ Tokens are plain CSS variables in
 
 ```css
 :root {
-  --color-brand-500: oklch(0.62 0.19 255);
-  --radius-md: 0.5rem;
+  --brand-500: oklch(0.7 0.185 45); /* current accent theme: orange */
+  --accent: var(--brand-500);
+  --radius-md: 0.625rem;
   /* ... */
 }
 .dark {
-  --color-surface: oklch(0.2 0.01 255);
+  --surface: oklch(0.19 0.006 60);
 }
 ```
 
@@ -53,16 +56,13 @@ Both systems consume them, neither redefines them:
 - **Tailwind v4** maps them in the `@theme` block of the entry CSS, so
   `bg-brand-500` etc. resolve to the variables.
 - **Chakra v3** maps them in `createSystem(defaultConfig, ...)` token
-  config using `var(--color-brand-500)` values.
+  config using `var(--brand-500)` values.
 
 Adding a color/spacing/radius = add the variable, wire it into both maps.
-Never hardcode hex/px values in components.
-
-Chat-era tokens (all in `tokens.css`, light + `.dark`): `--bubble-user`,
-`--surface-raised`, `--border-subtle`, `--accent`, `--text-faint`,
-`--success`, `--danger`, `--radius-lg/-xl/-full`, `--font-mono`. Assistant
-markdown typography and highlight.js token colors live in `app.css` under
-`.chat-prose`, driven by the same variables.
+Never hardcode hex/px values in components. Full token reference (color
+scale, type scale, shadows, motion, golden-ratio layout tokens, and the
+accent-theming mechanism) lives in `docs/design-system.md` — this doc
+stays focused on the Chakra/Tailwind split.
 
 ## Global reset & layers
 
@@ -100,7 +100,7 @@ Never read or write color mode through a second mechanism.
   per-call-site prop soup. Exception (documented): custom recipe variants
   require Chakra's typegen step, which this repo doesn't run — reusable
   looks are shared wrapper components instead (`ChipButton`,
-  `GhostIconButton` in `shared/components/`).
+  `GhostIconButton`, `SegmentedControl` in `shared/components/`).
 - Function declarations, named exports (repo-wide rule).
 
 ## Motion & animation
@@ -115,10 +115,16 @@ Strict split — never double-animate:
 - **CSS keyframes** (`app.css`): loops — typing dots (`chat-bounce`),
   streaming cursor blink, shimmer. All guarded by
   `prefers-reduced-motion`.
+- **Plain CSS `transition`**: simple state-driven property changes —
+  hover/focus tints (the `.interactive` utility class), the
+  sidebar-collapse grid track (`.sidebar-track`). Uses the
+  `--duration-*`/`--ease-*` tokens directly; see `docs/design-system.md`.
 - **Chakra built-ins**: Dialog/Menu/Tooltip/Collapsible transitions stay
   Chakra's — don't wrap them in motion.
 
-Keep it minimalist: tweens of 120–200ms, standard easing, no springs.
+Keep it minimalist: tweens of 120–280ms (the `--duration-*` tokens),
+standard easing, no springs. `shared/lib/motion.ts` mirrors the CSS
+duration tokens as plain numbers for `m.*` components.
 
 ## Testing
 

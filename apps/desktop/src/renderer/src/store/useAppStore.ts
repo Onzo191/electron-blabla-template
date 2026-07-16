@@ -3,6 +3,8 @@ import {
   createChatSlice,
 } from "@renderer/features/chat/store/chatSlice";
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
+import { i18next } from "../i18n";
 import {
   createUiSlice,
   DARK_MEDIA_QUERY,
@@ -11,14 +13,27 @@ import {
 
 export type AppStore = UiSlice & ChatSlice;
 
-export const useAppStore = create<AppStore>()((...args) => ({
-  ...createUiSlice(...args),
-  ...createChatSlice()(...args),
-}));
+export const useAppStore = create<AppStore>()(
+  persist(
+    (...args) => ({
+      ...createUiSlice(...args),
+      ...createChatSlice()(...args),
+    }),
+    {
+      name: "myvng-ui-prefs",
+      partialize: (state) => ({
+        theme: state.theme,
+        language: state.language,
+        sidebarOpen: state.sidebarOpen,
+      }),
+    },
+  ),
+);
 
-// Apply the initial resolved theme to the DOM (createUiSlice only sets state)
-// and keep "system" mode in sync with OS-level preference changes.
+// Re-apply persisted (or default) UI prefs: createUiSlice/persist only set
+// state, they don't touch the DOM class or i18next.
 useAppStore.getState().setTheme(useAppStore.getState().theme);
+void i18next.changeLanguage(useAppStore.getState().language);
 
 if (typeof window !== "undefined" && typeof window.matchMedia === "function") {
   window

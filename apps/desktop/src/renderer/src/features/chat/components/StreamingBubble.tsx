@@ -1,3 +1,4 @@
+import { DURATION } from "@renderer/shared/lib/motion";
 import { useAppStore } from "@renderer/store/useAppStore";
 import { m } from "motion/react";
 import { useTranslation } from "react-i18next";
@@ -28,12 +29,12 @@ export function StreamingBubble(): React.JSX.Element | null {
     <m.div
       initial={{ opacity: 0, y: 4 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.15 }}
+      transition={{ duration: DURATION.normal }}
       className="flex flex-col gap-3"
     >
       {pendingUserMessage ? (
         <div className="flex justify-end">
-          <div className="max-w-[65ch] whitespace-pre-wrap rounded-xl bg-bubble-user px-4 py-2.5 text-[15px] text-bubble-user-text">
+          <div className="max-w-[61.8%] whitespace-pre-wrap rounded-xl bg-bubble-user px-4 py-2.5 text-md text-bubble-user-text">
             {pendingUserMessage.content}
           </div>
         </div>

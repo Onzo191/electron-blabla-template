@@ -16,7 +16,7 @@ const invoke: IpcInvoker = (channel, request) => {
   return ipcRenderer.invoke(channel, request);
 };
 
-const api = { invoke };
+const api = { invoke, platform: process.platform };
 
 // Use `contextBridge` APIs to expose Electron APIs to
 // renderer only if context isolation is enabled, otherwise

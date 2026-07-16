@@ -53,6 +53,9 @@
   "aiAgents": {
     "chat": {
       "greeting": "Xin chào {{value1}}, tôi có thể giúp gì cho bạn?",
+      "notReadyTitle": "Không thể tải trợ lý",
+      "notReadyDescription": "Thường là do chưa thiết lập mã truy cập API. Hãy thêm mã trong phần Cài đặt rồi quay lại đây.",
+      "notReadyAction": "Đi tới Cài đặt",
       "scrollToBottom": "Cuộn xuống tin nhắn mới nhất",
       "aiDisclaimer": "Nội dung do AI tạo ra có thể không chính xác",
       "webSearchChipWebOn": "+ Tìm web",
@@ -220,7 +223,9 @@
       "failedToSubmit": "Không thể gửi phản hồi"
     },
     "actions": {
-      "newChat": "Chat mới"
+      "newChat": "Chat mới",
+      "collapseSidebar": "Thu gọn thanh bên",
+      "expandSidebar": "Mở rộng thanh bên"
     },
     "colleagueCard": {
       "phone": "Điện thoại",
@@ -244,6 +249,55 @@
       "delete": "Xóa",
       "close": "Đóng",
       "offline": "Mất kết nối mạng. Vui lòng kiểm tra đường truyền và thử lại."
+    },
+    "settings": {
+      "title": "Cài đặt",
+      "nav": {
+        "appearance": "Giao diện",
+        "language": "Ngôn ngữ",
+        "account": "Tài khoản",
+        "updates": "Cập nhật",
+        "about": "Thông tin"
+      },
+      "appearance": {
+        "theme": "Chủ đề",
+        "themeDescription": "Chọn giao diện hiển thị của ứng dụng.",
+        "themeLight": "Sáng",
+        "themeDark": "Tối",
+        "themeSystem": "Theo hệ thống"
+      },
+      "language": {
+        "label": "Ngôn ngữ",
+        "description": "Chọn ngôn ngữ hiển thị của ứng dụng."
+      },
+      "account": {
+        "apiToken": "Mã truy cập API",
+        "apiTokenDescription": "Được mã hóa và lưu qua keychain của hệ điều hành; gửi kèm dưới dạng Bearer header tới backend. Sẽ được thay bằng luồng đăng nhập thật sau này.",
+        "apiTokenPlaceholder": "Dán mã truy cập…",
+        "save": "Lưu",
+        "clear": "Xóa",
+        "savedTitle": "Đã lưu mã truy cập",
+        "saveFailedTitle": "Lưu mã truy cập thất bại",
+        "clearedTitle": "Đã xóa mã truy cập",
+        "clearFailedTitle": "Xóa mã truy cập thất bại"
+      },
+      "updates": {
+        "currentVersion": "Phiên bản hiện tại {{version}}",
+        "check": "Kiểm tra cập nhật",
+        "checking": "Đang kiểm tra…",
+        "upToDate": "Bạn đang dùng phiên bản mới nhất.",
+        "available": "Đã có bản cập nhật {{version}}.",
+        "downloading": "Đang tải… {{progress}}%",
+        "downloaded": "Đã tải xong bản cập nhật — khởi động lại để cài đặt.",
+        "download": "Tải xuống",
+        "restart": "Khởi động lại ngay",
+        "error": "Không thể kiểm tra cập nhật.",
+        "unavailable": "Bản build này được cập nhật qua kho ứng dụng."
+      },
+      "about": {
+        "version": "Phiên bản {{version}}",
+        "platform": "Nền tảng: {{platform}}"
+      }
     }
   }
 }

@@ -20,18 +20,35 @@ export function resolveTheme(theme: Theme): ResolvedTheme {
 
 function applyResolvedTheme(resolved: ResolvedTheme): void {
   document.documentElement.classList.toggle("dark", resolved === "dark");
+  // The win32 titlebar overlay's caption buttons are OS-drawn and don't
+  // follow page CSS; no-op on other platforms (see main/ipc/window.ts).
+  // `window.api` is absent outside the Electron preload context (tests).
+  if (window.api?.platform === "win32") {
+    void window.api.invoke("window:setTitleBarTheme", { theme: resolved });
+  }
 }
+
+export type SettingsSection =
+  | "appearance"
+  | "language"
+  | "account"
+  | "updates"
+  | "about";
 
 export type UiSlice = {
   sidebarOpen: boolean;
   theme: Theme;
   resolvedTheme: ResolvedTheme;
   language: Language;
+  settingsOpen: boolean;
+  settingsSection: SettingsSection;
   toggleSidebar: () => void;
   setTheme: (theme: Theme) => void;
   setLanguage: (language: Language) => void;
   /** Re-resolves against the current OS preference; no-op unless theme is "system". */
   syncSystemTheme: () => void;
+  openSettings: (section?: SettingsSection) => void;
+  closeSettings: () => void;
 };
 
 export const createUiSlice: StateCreator<UiSlice, [], [], UiSlice> = (
@@ -42,6 +59,8 @@ export const createUiSlice: StateCreator<UiSlice, [], [], UiSlice> = (
   theme: "system",
   resolvedTheme: resolveTheme("system"),
   language: DEFAULT_LANGUAGE,
+  settingsOpen: false,
+  settingsSection: "appearance",
   toggleSidebar: () => set((state) => ({ sidebarOpen: !state.sidebarOpen })),
   setLanguage: (language) => {
     void i18next.changeLanguage(language);
@@ -58,4 +77,10 @@ export const createUiSlice: StateCreator<UiSlice, [], [], UiSlice> = (
     applyResolvedTheme(resolvedTheme);
     set({ resolvedTheme });
   },
+  openSettings: (section) =>
+    set((state) => ({
+      settingsOpen: true,
+      settingsSection: section ?? state.settingsSection,
+    })),
+  closeSettings: () => set({ settingsOpen: false }),
 });

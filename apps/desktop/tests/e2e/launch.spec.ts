@@ -8,7 +8,9 @@ test("app launches and shows the chat shell", async () => {
   await expect(
     window.getByRole("navigation", { name: /conversations|trò chuyện/i }),
   ).toBeVisible();
-  await expect(window.getByRole("textbox")).toBeVisible();
+  await expect(
+    window.getByRole("textbox", { name: /ask anything|hỏi bất kỳ/i }),
+  ).toBeVisible();
 
   await app.close();
 });

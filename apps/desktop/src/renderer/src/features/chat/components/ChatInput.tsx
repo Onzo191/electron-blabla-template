@@ -40,7 +40,7 @@ export function ChatInput({
   };
 
   return (
-    <div className="mx-auto w-full max-w-3xl px-4 pb-4">
+    <div className="mx-auto w-full max-w-content px-4 pb-4">
       {!online ? (
         <p
           role="status"
@@ -50,7 +50,7 @@ export function ChatInput({
           {t("common.offline")}
         </p>
       ) : null}
-      <div className="flex items-end gap-2 rounded-xl border border-border-subtle bg-surface-raised p-2 focus-within:border-accent">
+      <div className="interactive flex items-end gap-2 rounded-xl border border-border-subtle bg-surface-raised p-2 shadow-sm focus-within:border-accent">
         <IconButton
           aria-label={t("chat.webSearch")}
           aria-pressed={webSearchEnabled}
@@ -109,6 +109,9 @@ export function ChatInput({
             aria-label={t("chat.sendMessage")}
             size="sm"
             variant="solid"
+            bg="accent"
+            color="accentFg"
+            _hover={{ bg: "accentEmphasis" }}
             disabled={!canSend}
             onClick={send}
           >

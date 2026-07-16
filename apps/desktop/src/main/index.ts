@@ -5,13 +5,30 @@ import icon from "../../resources/icon.png?asset";
 import { registerIpcHandlers } from "./ipc";
 import { initLogger, logger } from "./services/logger";
 
+let mainWindow: BrowserWindow | null = null;
+
 function createWindow(): void {
-  // Create the browser window.
-  const mainWindow = new BrowserWindow({
-    width: 900,
-    height: 670,
+  // Create the browser window. macOS gets an inset traffic-light titlebar
+  // (renderer draws its own header/drag region); Windows gets the caption
+  // overlay; Linux keeps the default frame.
+  const window = new BrowserWindow({
+    width: 1200,
+    height: 760,
+    minWidth: 760,
+    minHeight: 560,
     show: false,
     autoHideMenuBar: true,
+    ...(process.platform === "darwin"
+      ? {
+          titleBarStyle: "hiddenInset",
+          trafficLightPosition: { x: 16, y: 12 },
+        }
+      : process.platform === "win32"
+        ? {
+            titleBarStyle: "hidden",
+            titleBarOverlay: { color: "#fcfbf9", symbolColor: "#212121" },
+          }
+        : {}),
     ...(process.platform === "linux" ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, "../preload/index.js"),
@@ -20,12 +37,16 @@ function createWindow(): void {
       nodeIntegration: false,
     },
   });
-
-  mainWindow.on("ready-to-show", () => {
-    mainWindow.show();
+  mainWindow = window;
+  window.on("closed", () => {
+    if (mainWindow === window) mainWindow = null;
   });
 
-  mainWindow.webContents.setWindowOpenHandler((details) => {
+  window.on("ready-to-show", () => {
+    window.show();
+  });
+
+  window.webContents.setWindowOpenHandler((details) => {
     if (details.url.startsWith("https://")) {
       void shell.openExternal(details.url);
     }
@@ -35,9 +56,9 @@ function createWindow(): void {
   // HMR for renderer base on electron-vite cli.
   // Load the remote URL for development or the local html file for production.
   if (is.dev && process.env.ELECTRON_RENDERER_URL) {
-    mainWindow.loadURL(process.env.ELECTRON_RENDERER_URL);
+    window.loadURL(process.env.ELECTRON_RENDERER_URL);
   } else {
-    mainWindow.loadFile(join(__dirname, "../renderer/index.html"));
+    window.loadFile(join(__dirname, "../renderer/index.html"));
   }
 }
 
@@ -58,7 +79,7 @@ app.whenReady().then(() => {
     optimizer.watchWindowShortcuts(window);
   });
 
-  const stopUpdateChecks = registerIpcHandlers();
+  const stopUpdateChecks = registerIpcHandlers(() => mainWindow);
   app.on("before-quit", stopUpdateChecks);
 
   createWindow();

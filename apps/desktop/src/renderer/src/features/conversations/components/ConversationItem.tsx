@@ -29,8 +29,10 @@ export function ConversationItem({
 
   return (
     <div
-      className={`group relative flex items-center rounded-md ${
-        isActive ? "bg-surface-200" : "hover:bg-surface-100"
+      className={`group interactive relative flex items-center rounded-md ${
+        isActive
+          ? "bg-accent-subtle text-accent"
+          : "text-text-muted hover:bg-surface-100 hover:text-text"
       } ${isFlashing ? "conversation-flash" : ""}`}
       data-conversation-id={conversation.id}
     >

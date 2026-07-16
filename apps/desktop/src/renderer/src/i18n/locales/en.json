@@ -53,6 +53,9 @@
   "aiAgents": {
     "chat": {
       "greeting": "Hi {{value1}}, how can I help you?",
+      "notReadyTitle": "Couldn't load the assistant",
+      "notReadyDescription": "This usually means the API token isn't set yet. Add it in Settings, then come back here.",
+      "notReadyAction": "Go to Settings",
       "scrollToBottom": "Scroll to latest messages",
       "aiDisclaimer": "AI-generated content may be incorrect",
       "webSearchChipWebOn": "+ Browse web",
@@ -220,7 +223,9 @@
       "failedToSubmit": "Failed to submit feedback"
     },
     "actions": {
-      "newChat": "New Chat"
+      "newChat": "New Chat",
+      "collapseSidebar": "Collapse sidebar",
+      "expandSidebar": "Expand sidebar"
     },
     "colleagueCard": {
       "phone": "Phone",
@@ -244,6 +249,55 @@
       "delete": "Delete",
       "close": "Close",
       "offline": "No internet connection. Check your network and try again."
+    },
+    "settings": {
+      "title": "Settings",
+      "nav": {
+        "appearance": "Appearance",
+        "language": "Language",
+        "account": "Account",
+        "updates": "Updates",
+        "about": "About"
+      },
+      "appearance": {
+        "theme": "Theme",
+        "themeDescription": "Choose how the app looks.",
+        "themeLight": "Light",
+        "themeDark": "Dark",
+        "themeSystem": "System"
+      },
+      "language": {
+        "label": "Language",
+        "description": "Choose the app's display language."
+      },
+      "account": {
+        "apiToken": "API token",
+        "apiTokenDescription": "Stored encrypted via the OS keychain; sent as a Bearer header to the agent backend. A real login flow replaces this later.",
+        "apiTokenPlaceholder": "Paste access token…",
+        "save": "Save",
+        "clear": "Clear",
+        "savedTitle": "API token saved",
+        "saveFailedTitle": "Failed to save token",
+        "clearedTitle": "API token cleared",
+        "clearFailedTitle": "Failed to clear token"
+      },
+      "updates": {
+        "currentVersion": "Current version {{version}}",
+        "check": "Check for updates",
+        "checking": "Checking…",
+        "upToDate": "You're up to date.",
+        "available": "Update {{version}} available.",
+        "downloading": "Downloading… {{progress}}%",
+        "downloaded": "Update downloaded — restart to install.",
+        "download": "Download",
+        "restart": "Restart now",
+        "error": "Couldn't check for updates.",
+        "unavailable": "Updates are managed by the app store on this build."
+      },
+      "about": {
+        "version": "Version {{version}}",
+        "platform": "Platform: {{platform}}"
+      }
     }
   }
 }

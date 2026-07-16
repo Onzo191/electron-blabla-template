@@ -1,4 +1,5 @@
 import { IconButton } from "@chakra-ui/react";
+import { DURATION } from "@renderer/shared/lib/motion";
 import { ArrowDown } from "lucide-react";
 import { AnimatePresence, m } from "motion/react";
 import { useTranslation } from "react-i18next";
@@ -21,7 +22,7 @@ export function ScrollToBottomButton({
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.9 }}
-          transition={{ duration: 0.12 }}
+          transition={{ duration: DURATION.fast }}
           className="absolute bottom-4 left-1/2 z-10 -translate-x-1/2"
         >
           <IconButton
